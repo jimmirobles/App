@@ -63,7 +63,7 @@
 				<div class="panel-heading">
 					<h3 class="panel-title">Actividad realizada</h3>
 				</div>
-				<div class="panel-body">{{ $documento[0]->servicio }}</div>
+				<div class="panel-body">{{ $documento[0]->solucion }}</div>
 			</div>
 		</div>
 	</div>
@@ -71,7 +71,7 @@
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3 class="panel-title">Comentarios</h3>
+					<h3 class="panel-title">Comentarios adicionales</h3>
 				</div>
 				<div class="panel-body">{{ $documento[0]->comentarios }}</div>
 			</div>

@@ -10,7 +10,9 @@
     		<div class="panel panel-default">
     			<div class="panel-heading">
     				Servicios
-    				<a href="{{ route('servicios.create') }}" class="btn btn-info btn-xs pull-right">Nuevo</a>
+    				<a href="{{ route('servicios.create') }}" class="btn btn-default btn-xs pull-right">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo
+                    </a>
     			</div>
     			<div class="panel-body">
     				<div class="table-responsive">
@@ -19,7 +21,7 @@
     							<tr>
     								<th>#</th>
     								<th>Nombre</th>
-                                    <th>Acción</th>
+                                    <th class="col-lg-2">Acción</th>
     							</tr>
     						</thead>
     						<tbody>
@@ -28,8 +30,12 @@
                                     <td>{{ $servicio->id }}</td>
                                     <td>{{ $servicio->nombre }}</td>
                                     <td>
-                                        <a href="{{ route('servicios.edit', $servicio->id) }}" class="btn btn-default btn-xs">Editar</a>
-                                        <a href="{{ route('servicios.destroy', $servicio->id) }}" onclick="return confirm('¿Deseas eliminarlo?')" class="btn btn-danger btn-xs">Eliminar</a>
+                                        <a href="{{ route('servicios.edit', $servicio->id) }}" class="btn btn-default btn-xs">
+                                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Editar
+                                        </a>
+                                        <a href="{{ route('servicios.destroy', $servicio->id) }}" onclick="return confirm('¿Deseas eliminarlo?')" class="btn btn-danger btn-xs"> 
+                                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Borrar
+                                        </a>
                                     </td>
                                 </tr>
                                 @endforeach

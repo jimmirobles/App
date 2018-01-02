@@ -11,7 +11,7 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-3">
-                            <i class="fa fa-comments fa-5x"></i>
+                            <i class="fa fa-file-pdf-o fa-5x" aria-hidden="true"></i>
                         </div>
                         <div class="col-xs-9 text-right">
                             <div class="huge">{{ $cuenta }}</div>
@@ -96,7 +96,7 @@
                                     <td>{{ $documento->folio }}</td>
                                     <td>{{ $documento->razon_social }}</td>
                                     <td>{{ $documento->fecha }}</td>
-                                    <td><a href="{{ route('documentos.show', $documento->id) }}">Ver</a></td>
+                                    <td><a class="btn btn-default btn-xs" href="{{ route('documentos.show', $documento->id) }}"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> Imprimir</a></td>
                                 </tr>
                                 @endforeach
                             </tbody>

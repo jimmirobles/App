@@ -45,16 +45,24 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="{{ route('index') }}"><i class="fa fa-dashboard fa-fw"></i> Inicio</a>
+                            <a href="{{ route('index') }}">
+                                <i class="fa fa-home fa-fw" aria-hidden="true"></i> Inicio
+                            </a>
                         </li>
                         <li>
-                            <a href="{{ route('asesores.index') }}"><i class="fa fa-users fa-fw"></i> Asesores</a>
+                            <a href="{{ route('asesores.index') }}">
+                                <i class="fa fa-users fa-fw" aria-hidden="true"></i> Asesores
+                            </a>
                         </li>
                         <li>
-                            <a href="{{ route('empresas.index') }}"><i class="fa fa-building fa-fw"></i> Empresas</a>
+                            <a href="{{ route('empresas.index') }}">
+                                <i class="fa fa-building fa-fw"></i> Empresas
+                            </a>
                         </li>
                         <li>
-                            <a href="{{ route('servicios.index') }}"><i class="fa fa-gamepad fa-fw"></i> Servicios</a>
+                            <a href="{{ route('servicios.index') }}">
+                                <i class="fa fa-cogs fa-fw"></i> Servicios
+                            </a>
                         </li>
                     </ul>
                 </div>

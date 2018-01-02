@@ -20,6 +20,7 @@ class FrontController extends Controller
         $documentos = DB::table('documentos')
                         ->join('empresas', 'documentos.id_empresa', '=', 'empresas.id')
                         ->select('documentos.*', 'empresas.razon_social')
+                        ->orderBy('id', 'dsc')
                         ->get();
         $cuenta = DB::table('documentos')->count();
         return view('pages.index', compact('documentos', 'cuenta'));

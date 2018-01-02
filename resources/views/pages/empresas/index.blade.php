@@ -10,7 +10,9 @@
     		<div class="panel panel-default">
     			<div class="panel-heading">
     				Empresas
-    				<a href="{{ route('empresas.create') }}" class="btn btn-info btn-xs pull-right">Nuevo</a>
+    				<a href="{{ route('empresas.create') }}" class="btn btn-default btn-xs pull-right">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo
+                    </a>
     			</div>
     			<div class="panel-body">
     				<div class="table-responsive">
@@ -30,8 +32,12 @@
                                     <td>{{ $empresa->razon_social }}</td>
                                     <td>{{ $empresa->rfc }}</td>
                                     <td>
-                                        <a href="{{ route('empresas.edit', $empresa->id) }}" class="btn btn-default btn-xs">Editar</a>
-                                        <a href="{{ route('empresas.destroy', $empresa->id) }}" onclick="return confirm('¿Deseas eliminarlo?')" class="btn btn-danger btn-xs">Eliminar</a>
+                                        <a href="{{ route('empresas.edit', $empresa->id) }}" class="btn btn-default btn-xs">
+                                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Editar
+                                        </a>
+                                        <a href="{{ route('empresas.destroy', $empresa->id) }}" onclick="return confirm('¿Deseas eliminarlo?')" class="btn btn-danger btn-xs">
+                                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Borrar
+                                        </a>
                                     </td>
                                 </tr>
                                 @endforeach
