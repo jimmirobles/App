@@ -2,38 +2,37 @@
 
 namespace CRM\Http\Controllers\Auth;
 
+use Auth;
 use CRM\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
-    use AuthenticatesUsers;
-
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest', ['only' => 'showLoginForm']);
+    }
+
+    public function showLoginForm()
+    {
+        return view('login.index');
+    }
+
+    public function login()
+    {
+        $credentials = $this->validate(request(), [
+            'email'     => 'email|required|string',
+            'password'  => 'required|string'
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            return redirect()->route('dashboard.index');
+        }
+        return back()->withInput(request(['email']));
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/');
     }
 }

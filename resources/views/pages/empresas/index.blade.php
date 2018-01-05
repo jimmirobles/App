@@ -22,7 +22,7 @@
     								<th>#</th>
     								<th>Nombre</th>
                                     <th>RFC</th>
-                                    <th>Acción</th>
+                                    <th class="col-lg-2">Acción</th>
     							</tr>
     						</thead>
     						<tbody>

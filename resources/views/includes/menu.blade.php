@@ -6,14 +6,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ route('index') }}">CRM</a>
+                <a class="navbar-brand" href="{{ route('dashboard.index') }}">CRM</a>
             </div>
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        <i class="fa fa-user fa-fw"></i> {{ auth()->user()->name }} <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> Perfil</a>
@@ -21,7 +21,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Configuracion</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
+                        <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -45,7 +45,7 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="{{ route('index') }}">
+                            <a href="{{ route('dashboard.index') }}">
                                 <i class="fa fa-home fa-fw" aria-hidden="true"></i> Inicio
                             </a>
                         </li>

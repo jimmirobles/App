@@ -80,14 +80,14 @@
                     Listado de servicios realizados
                 </div>
                 <div class="panel-body">
-                    <div class="table table-responsive">
+                    <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th class="col-lg-1">Folio</th>
                                     <th>Empresa</th>
-                                    <th class="col-lg-2">Fecha</th>
-                                    <th>Acciones</th>
+                                    <th>Fecha</th>
+                                    <th class="col-xs-3">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -96,7 +96,10 @@
                                     <td>{{ $documento->folio }}</td>
                                     <td>{{ $documento->razon_social }}</td>
                                     <td>{{ $documento->fecha }}</td>
-                                    <td><a class="btn btn-default btn-xs" href="{{ route('documentos.show', $documento->id) }}"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> Imprimir</a></td>
+                                    <td>
+                                        <a href="{{ route('documentos.show', $documento->id) }}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> Imprimir</a>
+                                        <a href="#" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-envelope" aria-hidden="true"> Email</a>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>
