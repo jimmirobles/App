@@ -2,12 +2,12 @@
 
 namespace CRM\Http\Controllers;
 
-use CRM\Http\Requests\AsesorRequest;
+use CRM\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use CRM\Asesor;
+use CRM\User;
 
-class AsesoresController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class AsesoresController extends Controller
      */
     public function index()
     {
-        $asesores = DB::table('asesores')->orderBy('nombre')->paginate(9);
-        return view('pages.asesores.index', compact('asesores'));
+        $usuarios = DB::table('users')->orderBy('email')->paginate(9);
+        return view('pages.usuarios.index', compact('usuarios'));
     }
 
     /**
@@ -27,7 +27,7 @@ class AsesoresController extends Controller
      */
     public function create()
     {
-        return view('pages.asesores.create');
+        return view('pages.usuarios.create');
     }
 
     /**
@@ -36,13 +36,13 @@ class AsesoresController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AsesorRequest $request)
+    public function store(UserRequest $request)
     {
-        $asesor = new Asesor($request->all());
-        $asesor->save();
+        $usuario = new User($request->all());
+        $usuario->save();
 
-        flash('Asesor: '. $asesor->nombre .', agregado correctamente.')->success()->important();
-        return redirect()->action('AsesoresController@index');
+        flash('Usuario: <strong>'. $usuario->name .'</strong>, agregado correctamente.')->success()->important();
+        return redirect()->action('UsersController@index');
     }
 
     /**
@@ -64,8 +64,8 @@ class AsesoresController extends Controller
      */
     public function edit($id)
     {
-        $asesor = Asesor::find($id);
-        return view('pages.asesores.edit', compact('asesor'));
+        $usuario = User::find($id);
+        return view('pages.usuarios.edit', compact('usuario'));
     }
 
     /**
@@ -77,12 +77,12 @@ class AsesoresController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $asesor = Asesor::find($id);
-        $asesor->fill($request->all());
-        $asesor->save();
+        $usuario = User::find($id);
+        $usuario->fill($request->all());
+        $usuario->save();
 
-        flash('Se ha actualizado: <strong>'. $asesor->nombre .'</strong>, correctamente.')->success()->important();
-        return redirect()->action('AsesoresController@index');
+        flash('Se ha actualizado: <strong>'. $usuario->name .'</strong>, correctamente.')->success()->important();
+        return redirect()->action('UsersController@index');
     }
 
     /**
@@ -93,9 +93,9 @@ class AsesoresController extends Controller
      */
     public function destroy($id)
     {
-        $asesor = Asesor::find($id);
-        $asesor->delete();
-        flash('Se ha borrado: <strong>'. $asesor->nombre .'</strong>, exitosamente!')->error()->important();
-        return redirect()->action('AsesoresController@index');
+        $usuario = User::find($id);
+        $usuario->delete();
+        flash('Se ha borrado: <strong>'. $usuario->name .'</strong>, exitosamente!')->error()->important();
+        return redirect()->action('UsersController@index');
     }
 }

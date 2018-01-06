@@ -34,7 +34,7 @@ class FrontController extends Controller
     public function create()
     {
         $empresas = DB::table('empresas')->orderBy('razon_social')->pluck('razon_social', 'id');
-        $asesores = DB::table('asesores')->orderBy('nombre')->pluck('nombre', 'id');
+        $asesores = DB::table('users')->orderBy('email')->pluck('name', 'id');
         $servicios = DB::table('servicios')->orderBy('nombre')->pluck('nombre', 'id');
         $next_folio = DB::table('documentos')->max('folio');
         return view('pages.documentos.create', compact('empresas', 'servicios', 'asesores', 'next_folio'));
@@ -64,10 +64,10 @@ class FrontController extends Controller
     public function show($id)
     {
         $documento = DB::table('documentos')
-                        ->select('documentos.*', 'empresas.*', 'asesores.nombre as nombreAsesor', 'servicios.nombre as nombreServicio')
+                        ->select('documentos.*', 'empresas.*', 'users.name as nombreAsesor', 'servicios.nombre as nombreServicio')
                         ->join('servicios', 'documentos.id_servicio', '=', 'servicios.id')
                         ->join('empresas', 'documentos.id_empresa', '=', 'empresas.id')
-                        ->join('asesores', 'documentos.id_asesor', '=', 'asesores.id')
+                        ->join('users', 'documentos.id_asesor', '=', 'users.id')
                         ->where('documentos.id', $id)
                         ->get();
         return view('pages.documentos.show', compact('documento'));

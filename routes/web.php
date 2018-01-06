@@ -16,10 +16,10 @@
 // });
 
 Route::resource('dashboard', 'FrontController');
-Route::resource('asesores', 'AsesoresController');
 Route::resource('empresas', 'EmpresasController');
 Route::resource('servicios', 'ServiciosController');
 Route::resource('documentos', 'FrontController');
+Route::resource('usuarios', 'UsersController');
 
 Route::get('/', 'Auth\LoginController@showLoginForm');
 Route::post('login', 'Auth\LoginController@login')->name('login');
@@ -30,14 +30,14 @@ Route::get('servicios/{id}/destroy', [
 	'as' 	=> 'servicios.destroy',
 ]);
 
-Route::get('asesores/{id}/destroy', [
-	'uses' 	=> 'AsesoresController@destroy',
-	'as' 	=> 'asesores.destroy',
-]);
-
 Route::get('empresas/{id}/destroy', [
 	'uses' 	=> 'EmpresasController@destroy',
 	'as' 	=> 'empresas.destroy',
+]);
+
+Route::get('usuarios/{id}/destroy', [
+	'uses' 	=> 'UsersController@destroy',
+	'as' 	=> 'usuarios.destroy',
 ]);
 
 

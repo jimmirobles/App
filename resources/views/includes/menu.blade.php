@@ -50,11 +50,6 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('asesores.index') }}">
-                                <i class="fa fa-users fa-fw" aria-hidden="true"></i> Asesores
-                            </a>
-                        </li>
-                        <li>
                             <a href="{{ route('empresas.index') }}">
                                 <i class="fa fa-building fa-fw"></i> Empresas
                             </a>
@@ -62,6 +57,11 @@
                         <li>
                             <a href="{{ route('servicios.index') }}">
                                 <i class="fa fa-cogs fa-fw"></i> Servicios
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('usuarios.index') }}">
+                                <i class="fa fa-users fa-fw" aria-hidden="true"></i> Usuarios
                             </a>
                         </li>
                     </ul>

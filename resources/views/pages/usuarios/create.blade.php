@@ -1,8 +1,8 @@
 @extends('layouts.principal')
 
-@section('page-title', 'Crear servicio')
+@section('page-title', 'Crear usuario')
 
-@section('title', 'Crear')
+@section('title', 'Nuevo usuario')
 
 @section('content')
 	<div class="row">
@@ -10,8 +10,8 @@
 
 			@include('errors.form-error')
 
-			{!! Form::open(['route'=>'servicios.store', 'method'=>'POST']) !!}
-				@include('forms.servicios')
+			{!! Form::open(['route'=>'usuarios.store', 'method'=>'POST']) !!}
+				@include('forms.usuarios')
 			{!! Form::close() !!}
 		</div>
 	</div>

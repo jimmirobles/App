@@ -1,8 +1,8 @@
 @extends('layouts.principal')
 
-@section('page-title', 'Servicios')
+@section('page-title', 'Usuarios')
 
-@section('title', 'Listado de asesores')
+@section('title', 'Listado de usuarios')
 
 @section('content')
     <div class="row">
@@ -10,7 +10,7 @@
     		<div class="panel panel-default">
     			<div class="panel-heading">
     				Asesores
-    				<a href="{{ route('asesores.create') }}" class="btn btn-default btn-xs pull-right">
+    				<a href="{{ route('usuarios.create') }}" class="btn btn-default btn-xs pull-right">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo
                     </a>
     			</div>
@@ -19,23 +19,23 @@
     					<table class="table table-striped table-bordered table-hover">
     						<thead>
     							<tr>
-    								<th>#</th>
+    								<th>ID</th>
     								<th>Nombre</th>
                                     <th>Correo</th>
                                     <th class="col-lg-2">Acción</th>
     							</tr>
     						</thead>
     						<tbody>
-                                @foreach($asesores as $asesor)
+                                @foreach($usuarios as $usuario)
                                 <tr>
-                                    <td>{{ $asesor->id }}</td>
-                                    <td>{{ $asesor->nombre }}</td>
-                                    <td>{{ $asesor->email }}</td>
+                                    <td>{{ $usuario->id }}</td>
+                                    <td>{{ $usuario->name }}</td>
+                                    <td>{{ $usuario->email }}</td>
                                     <td>
-                                        <a href="{{ route('asesores.edit', $asesor->id) }}" class="btn btn-default btn-xs">
+                                        <a href="{{ route('usuarios.edit', $usuario->id) }}" class="btn btn-default btn-xs">
                                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Editar
                                         </a>
-                                        <a href="{{ route('asesores.destroy', $asesor->id) }}" onclick="return confirm('¿Deseas eliminarlo?')" class="btn btn-danger btn-xs">
+                                        <a href="{{ route('usuarios.destroy', $usuario->id) }}" onclick="return confirm('¿Deseas eliminarlo?')" class="btn btn-danger btn-xs">
                                             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Borrar
                                         </a>
                                     </td>
@@ -44,7 +44,7 @@
     						</tbody>
     					</table>
     				</div>
-                    {{ $asesores->links() }}
+                    {{ $usuarios->links() }}
     			</div>
     		</div>
     	</div>

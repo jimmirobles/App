@@ -42,7 +42,7 @@ class ServiciosController extends Controller
         $servicio = new Servicio($request->all());
         $servicio->save();
 
-        flash('Servicio agregado correctamente.')->success()->important();
+        flash('Servicio: <strong>'. $servicio->nombre .'</strong> agregado correctamente.')->success()->important();
         return redirect()->action('ServiciosController@index');
     }
 
@@ -82,7 +82,7 @@ class ServiciosController extends Controller
         $servicio->fill($request->all());
         $servicio->save();
 
-        flash('Se ha actualizado '. $servicio->nombre .' correctamente.')->success()->important();
+        flash('Se ha actualizado <strong>'. $servicio->nombre .'</strong> correctamente.')->success()->important();
         return redirect()->action('ServiciosController@index');
     }
 
@@ -96,7 +96,7 @@ class ServiciosController extends Controller
     {
         $servicio = Servicio::find($id);
         $servicio->delete();
-        flash('Se ha borrado '. $servicio->nombre .' exitosamente!')->error()->important();
+        flash('Se ha borrado <strong>'. $servicio->nombre .'</strong> exitosamente!')->error()->important();
         return redirect()->action('ServiciosController@index');
     }
 }
