@@ -2,12 +2,12 @@
 
 namespace CRM\Http\Controllers;
 
-use CRM\Http\Requests\EmpresaRequest;
+use CRM\Http\Requests\ClienteRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use CRM\Empresa;
+use CRM\Cliente;
 
-class EmpresasController extends Controller
+class ClientesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class EmpresasController extends Controller
      */
     public function index()
     {
-        $empresas = DB::table('empresas')->orderBy('razon_social')->paginate(9);
-        return view('pages.empresas.index', compact('empresas'));
+        $clientes = DB::table('clientes')->orderBy('razon_social')->paginate(9);
+        return view('pages.clientes.index', compact('clientes'));
     }
 
     /**
@@ -27,7 +27,7 @@ class EmpresasController extends Controller
      */
     public function create()
     {
-        return view('pages.empresas.create');
+        return view('pages.clientes.create');
     }
 
     /**
@@ -36,13 +36,13 @@ class EmpresasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(EmpresaRequest $request)
+    public function store(ClienteRequest $request)
     {
-        $empresa = new Empresa($request->all());
-        $empresa->save();
+        $cliente = new Cliente($request->all());
+        $cliente->save();
 
-        flash('Empresa: <strong>'. $empresa->razon_social .'</strong>, agregada correctamente.')->success()->important();
-        return redirect()->action('EmpresasController@index');
+        flash('Cliente: <strong>'. $cliente->razon_social .'</strong>, agregado correctamente.')->success()->important();
+        return redirect()->action('ClientesController@index');
     }
 
     /**
@@ -64,8 +64,8 @@ class EmpresasController extends Controller
      */
     public function edit($id)
     {
-        $empresa = Empresa::find($id);
-        return view('pages.empresas.edit', compact('empresa'));
+        $cliente = Cliente::find($id);
+        return view('pages.clientes.edit', compact('cliente'));
     }
 
     /**
@@ -77,12 +77,12 @@ class EmpresasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $empresa = Empresa::find($id);
-        $empresa->fill($request->all());
-        $empresa->save();
+        $cliente = Cliente::find($id);
+        $cliente->fill($request->all());
+        $cliente->save();
 
-        flash('Se ha actualizado: <strong>'. $empresa->razon_social .'</strong>, correctamente.')->success()->important();
-        return redirect()->action('EmpresasController@index');
+        flash('Se ha actualizado: <strong>'. $cliente->razon_social .'</strong>, correctamente.')->success()->important();
+        return redirect()->action('ClientesController@index');
     }
 
     /**
@@ -93,9 +93,9 @@ class EmpresasController extends Controller
      */
     public function destroy($id)
     {
-        $empresa = Empresa::find($id);
-        $empresa->delete();
-        flash('Se ha borrado: <strong>'. $empresa->razon_social .'</strong>, exitosamente!')->error()->important();
-        return redirect()->action('EmpresasController@index');
+        $cliente = Cliente::find($id);
+        $cliente->delete();
+        flash('Se ha borrado: <strong>'. $cliente->razon_social .'</strong>, exitosamente!')->error()->important();
+        return redirect()->action('ClientesController@index');
     }
 }

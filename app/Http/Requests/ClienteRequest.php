@@ -4,7 +4,7 @@ namespace CRM\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EmpresaRequest extends FormRequest
+class ClienteRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,8 @@ class EmpresaRequest extends FormRequest
     public function rules()
     {
         return [
-            'razon_social'    => 'min:5|required',
-            'rfc'       => 'min:12|max:13|required|unique:empresas',
-            'correo'    => 'required'
+            'razon_social'  => 'min:5|required',
+            'rfc'           => 'min:12|max:13|required|unique:clientes'
         ];
     }
 }

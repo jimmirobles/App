@@ -2,10 +2,16 @@
 
 namespace CRM\Http\Controllers;
 
+use CRM\Mail\DocumentCreated;
+use Illuminate\Support\Facades\Mail;
 use CRM\Http\Requests\DocumentoRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use CRM\User;
 use CRM\Documento;
+use CRM\Servicio;
+use CRM\Cliente;
+// use PDF;
 
 class FrontController extends Controller
 {
@@ -18,8 +24,8 @@ class FrontController extends Controller
     {
         // $documentos = DB::table('documentos')->orderBy('fecha')->paginate(10);
         $documentos = DB::table('documentos')
-                        ->join('empresas', 'documentos.id_empresa', '=', 'empresas.id')
-                        ->select('documentos.*', 'empresas.razon_social')
+                        ->join('clientes', 'documentos.id_cliente', '=', 'clientes.id')
+                        ->select('documentos.*', 'clientes.razon_social')
                         ->orderBy('id', 'dsc')
                         ->get();
         $cuenta = DB::table('documentos')->count();
@@ -33,7 +39,7 @@ class FrontController extends Controller
      */
     public function create()
     {
-        $empresas = DB::table('empresas')->orderBy('razon_social')->pluck('razon_social', 'id');
+        $empresas = DB::table('clientes')->orderBy('razon_social')->pluck('razon_social', 'id');
         $asesores = DB::table('users')->orderBy('email')->pluck('name', 'id');
         $servicios = DB::table('servicios')->orderBy('nombre')->pluck('nombre', 'id');
         $next_folio = DB::table('documentos')->max('folio');
@@ -46,10 +52,23 @@ class FrontController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DocumentoRequest $request)
     {
         $documentos = new Documento($request->all());
+        $servicio = Servicio::find($request->get('id_servicio'));
+        $cliente = Cliente::find($request->get('id_cliente'));
+        $asesor = User::find($request->get('id_asesor'));
+        $documentos['servicio_nombre'] = $servicio['nombre'];
+        $documentos['direccion'] = $cliente['direccion'];
+        $documentos['razon_social'] = $cliente['razon_social'];
+        $documentos['asesor_nombre'] = $asesor['name'];
         $documentos->save();
+
+        $folio =  $request->get('folio');
+
+        // dd($documentos);
+
+        Mail::to('habannaslim@gmail.com')->send(new DocumentCreated($folio));
 
         flash('Documento agregado correctamente.')->success()->important();
         return redirect()->action('FrontController@index');
@@ -63,14 +82,10 @@ class FrontController extends Controller
      */
     public function show($id)
     {
-        $documento = DB::table('documentos')
-                        ->select('documentos.*', 'empresas.*', 'users.name as nombreAsesor', 'servicios.nombre as nombreServicio')
-                        ->join('servicios', 'documentos.id_servicio', '=', 'servicios.id')
-                        ->join('empresas', 'documentos.id_empresa', '=', 'empresas.id')
-                        ->join('users', 'documentos.id_asesor', '=', 'users.id')
-                        ->where('documentos.id', $id)
-                        ->get();
-        return view('pages.documentos.show', compact('documento'));
+        $documento = Documento::find($id);
+        $cliente = Cliente::find($documento->id_cliente);
+        // dd($documento);
+        return view('pages.documentos.show', compact('documento', 'cliente'));
     }
 
     /**

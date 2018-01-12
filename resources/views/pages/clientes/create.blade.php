@@ -10,8 +10,8 @@
 
 			@include('errors.form-error')
 			
-			{!! Form::open(['route'=>'empresas.store', 'method'=>'POST']) !!}
-				@include('forms.empresas')
+			{!! Form::open(['route'=>'clientes.store', 'method'=>'POST']) !!}
+				@include('forms.clientes')
 			{!! Form::close() !!}
 		</div>
 	</div>

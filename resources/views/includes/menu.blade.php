@@ -50,8 +50,8 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('empresas.index') }}">
-                                <i class="fa fa-building fa-fw"></i> Empresas
+                            <a href="{{ route('clientes.index') }}">
+                                <i class="fa fa-building fa-fw"></i> Clientes
                             </a>
                         </li>
                         <li>

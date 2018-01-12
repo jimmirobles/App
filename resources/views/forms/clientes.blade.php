@@ -11,9 +11,5 @@
 	{!! Form::text('direccion', null, ['class'=>'form-control', 'placeholder'=>'Inserta el domicilio de la empresa'])!!}
 </div>
 <div class="form-group">
-	{!! Form::label('correo', 'Correo electronico: *') !!}
-	{!! Form::email('correo', null, ['class'=>'form-control', 'placeholder'=>'alguien@mail.com', 'required'])!!}
-</div>
-<div class="form-group">
 	{!! Form::submit('Guardar', ['class'=>'btn btn-default']) !!}
 </div>

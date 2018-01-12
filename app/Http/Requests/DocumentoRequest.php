@@ -24,12 +24,14 @@ class DocumentoRequest extends FormRequest
     public function rules()
     {
         return [
-            'hInicial'      => 'required',
-            'hFinal'        => 'required',
-            'fecha'         => 'required',
-            'id_empresa'    => 'required',
-            'id_sistema'    => 'required',
-            'id_asesor'     => 'required'
+            'fecha'             => 'string|required',
+            'hInicial'          => 'string|required',
+            'hFinal'            => 'string|required',
+            'contacto_nombre'   => 'string|required',
+            'contacto_email'    => 'email|required',
+            'id_cliente'        => 'required',
+            'id_servicio'       => 'required',
+            'id_asesor'         => 'required'
         ];
     }
 }

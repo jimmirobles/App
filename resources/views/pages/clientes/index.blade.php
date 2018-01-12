@@ -10,7 +10,7 @@
     		<div class="panel panel-default">
     			<div class="panel-heading">
     				Empresas
-    				<a href="{{ route('empresas.create') }}" class="btn btn-default btn-xs pull-right">
+    				<a href="{{ route('clientes.create') }}" class="btn btn-default btn-xs pull-right">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo
                     </a>
     			</div>
@@ -26,16 +26,16 @@
     							</tr>
     						</thead>
     						<tbody>
-                                @foreach($empresas as $empresa)
+                                @foreach($clientes as $cliente)
                                 <tr>
-                                    <td>{{ $empresa->id }}</td>
-                                    <td>{{ $empresa->razon_social }}</td>
-                                    <td>{{ $empresa->rfc }}</td>
+                                    <td>{{ $cliente->id }}</td>
+                                    <td>{{ $cliente->razon_social }}</td>
+                                    <td>{{ $cliente->rfc }}</td>
                                     <td>
-                                        <a href="{{ route('empresas.edit', $empresa->id) }}" class="btn btn-default btn-xs">
+                                        <a href="{{ route('clientes.edit', $cliente->id) }}" class="btn btn-default btn-xs">
                                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Editar
                                         </a>
-                                        <a href="{{ route('empresas.destroy', $empresa->id) }}" onclick="return confirm('¿Deseas eliminarlo?')" class="btn btn-danger btn-xs">
+                                        <a href="{{ route('clientes.destroy', $cliente->id) }}" onclick="return confirm('¿Deseas eliminarlo?')" class="btn btn-danger btn-xs">
                                             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Borrar
                                         </a>
                                     </td>
@@ -44,7 +44,7 @@
     						</tbody>
     					</table>
     				</div>
-                    {{ $empresas->links() }}
+                    {{ $clientes->links() }}
     			</div>
     		</div>
     	</div>

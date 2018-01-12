@@ -1,7 +1,7 @@
 @extends('layouts.print')
 
 @section('t-folio')
-	{{ $documento[0]->folio }}
+	{{ $documento->folio }}
 @endsection
 
 @section('contenido')
@@ -15,8 +15,8 @@
 		<div class="col-lg-3 col-xs-3">
 			<div class="text-center">
 				<strong>Reporte de Servicio</strong> <br>
-				Fecha: {{ date('d-m-Y', strtotime($documento[0]->fecha)) }} <br>
-				Folio: <big>{{ $documento[0]->folio }}</big>
+				Fecha: {{ date('d-m-Y', strtotime($documento->fecha)) }} <br>
+				Folio: <big>{{ $documento->folio }}</big>
 			</div>
 		</div>
 	</div>
@@ -28,19 +28,29 @@
 				<tbody>
 					<tr>
 						<td colspan="1">Cliente:</td>
-						<td colspan="3">{{ $documento[0]->razon_social }}</td>
+						<td colspan="3">{{ $documento->razon_social }}</td>
 					</tr>
 					<tr>
 						<td class="col-lg-1">RFC:</td>
-						<td class="col-lg-3">{{ $documento[0]->rfc }}</td>
+						<td class="col-lg-3">{{ $cliente->rfc }}</td>
 						<td class="col-lg-1">Domicilio:</td>
-						<td>{{ $documento[0]->direccion }}</td>
+						<td>{{ $documento->direccion }}</td>
 					</tr>
 					<tr>
+						<td>Contacto:</td>
+						<td>{{ $documento->contacto_nombre }}</td>
 						<td>Email:</td>
-						<td>{{ $documento[0]->correo }}</td>
+						<td>{{ $documento->contacto_email }}</td>
+					</tr>
+					<tr>
+						<td>Tipo:</td>
+						@if($documento->tipo === 1)
+							<td>En sitio</td>
+						@else
+							<td>Remoto</td>
+						@endif
 						<td>Servicio:</td>
-						<td>{{ $documento[0]->nombreServicio }}</td>
+						<td>{{ $documento->servicio_nombre }}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -53,7 +63,7 @@
 				<div class="panel-heading">
 					<h3 class="panel-title">Error reportado</h3>
 				</div>
-				<div class="panel-body">{{ $documento[0]->error }}</div>
+				<div class="panel-body">{{ $documento->error }}</div>
 			</div>
 		</div>
 	</div>
@@ -63,7 +73,7 @@
 				<div class="panel-heading">
 					<h3 class="panel-title">Actividad realizada</h3>
 				</div>
-				<div class="panel-body">{{ $documento[0]->solucion }}</div>
+				<div class="panel-body">{{ $documento->solucion }}</div>
 			</div>
 		</div>
 	</div>
@@ -73,7 +83,7 @@
 				<div class="panel-heading">
 					<h3 class="panel-title">Comentarios adicionales</h3>
 				</div>
-				<div class="panel-body">{{ $documento[0]->comentarios }}</div>
+				<div class="panel-body">{{ $documento->comentarios }}</div>
 			</div>
 		</div>
 	</div>
@@ -85,12 +95,12 @@
 					<tr>
 						<td class="col-lg-3">
 							<hr>
-							<div class="text-center">Asesor: {{ $documento[0]->nombreAsesor }}</div>
+							<div class="text-center">Asesor: {{ $documento->asesor_nombre }}</div>
 						</td>
 						<td colspan="2">
 							<div class="text-center">
-								<strong>Hora Inicial: </strong>{{ $documento[0]->hInicial }}<br>
-								<strong>Hora Final: </strong>{{ $documento[0]->hFinal }}
+								<strong>Hora Inicial: </strong>{{ $documento->hInicial }}<br>
+								<strong>Hora Final: </strong>{{ $documento->hFinal }}
 							</div>
 						</td>
 						<td class="col-lg-3">

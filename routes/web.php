@@ -16,7 +16,7 @@
 // });
 
 Route::resource('dashboard', 'FrontController');
-Route::resource('empresas', 'EmpresasController');
+Route::resource('clientes', 'ClientesController');
 Route::resource('servicios', 'ServiciosController');
 Route::resource('documentos', 'FrontController');
 Route::resource('usuarios', 'UsersController');
@@ -30,14 +30,18 @@ Route::get('servicios/{id}/destroy', [
 	'as' 	=> 'servicios.destroy',
 ]);
 
-Route::get('empresas/{id}/destroy', [
-	'uses' 	=> 'EmpresasController@destroy',
-	'as' 	=> 'empresas.destroy',
+Route::get('clientes/{id}/destroy', [
+	'uses' 	=> 'ClientesController@destroy',
+	'as' 	=> 'clientes.destroy',
 ]);
 
 Route::get('usuarios/{id}/destroy', [
 	'uses' 	=> 'UsersController@destroy',
 	'as' 	=> 'usuarios.destroy',
 ]);
+
+// Vistas de prueba
+Route::get('downloadPDF/{id}', 'FrontController@downloadPDF');
+Route::get('sendEmail', 'FrontController@sendEmail');
 
 
