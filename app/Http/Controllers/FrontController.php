@@ -11,10 +11,15 @@ use CRM\User;
 use CRM\Documento;
 use CRM\Servicio;
 use CRM\Cliente;
-// use PDF;
+use PDF;
 
 class FrontController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['show']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -64,11 +69,11 @@ class FrontController extends Controller
         $documentos['asesor_nombre'] = $asesor['name'];
         $documentos->save();
 
-        $folio =  $request->get('folio');
+        // $folio =  $request->get('folio');
 
         // dd($documentos);
 
-        Mail::to('habannaslim@gmail.com')->send(new DocumentCreated($folio));
+        // Mail::to($reques->get['contacto_email'])->send(new DocumentCreated($folio));
 
         flash('Documento agregado correctamente.')->success()->important();
         return redirect()->action('FrontController@index');
@@ -83,9 +88,8 @@ class FrontController extends Controller
     public function show($id)
     {
         $documento = Documento::find($id);
-        $cliente = Cliente::find($documento->id_cliente);
         // dd($documento);
-        return view('pages.documentos.show', compact('documento', 'cliente'));
+        return view('pages.documentos.show', compact('documento'));
     }
 
     /**
@@ -120,5 +124,24 @@ class FrontController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function sendEmail($id)
+    {
+        // Buscar el documento
+        $documento = Documento::find($id);
+        // Generar el PDF 
+        $pdf = PDF::loadView('pages.pdf.show', $documento);
+        
+        // Guardarlo en el servidor, si es correcto lo envía 
+        if ($pdf->save(storage_path('app/public/pdfs/human_business_soporte_'.$documento->folio.'.pdf'))) {
+            Mail::to($documento->contacto_email)
+                    ->send(new DocumentCreated($id, $documento->folio));
+            flash('Documento enviado correctamente a: <strong>' . $documento->contacto_email . '</strong>')->success()->important();
+            return redirect()->action('FrontController@index');
+        } else {
+            flash('Error al ejecutar la acction.')->error()->important();
+            return redirect()->action('FrontController@index');
+        }
     }
 }

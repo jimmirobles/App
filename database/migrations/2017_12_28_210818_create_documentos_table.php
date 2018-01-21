@@ -33,6 +33,7 @@ class CreateDocumentosTable extends Migration
             $table->integer('id_servicio');
             $table->string('servicio_nombre', 50);
             $table->boolean('estado')->default(false);
+            $table->boolean('enviado')->default(false);
             $table->timestamps();
         });
     }

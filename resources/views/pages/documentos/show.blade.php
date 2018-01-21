@@ -31,23 +31,29 @@
 						<td colspan="3">{{ $documento->razon_social }}</td>
 					</tr>
 					<tr>
-						<td class="col-lg-1">RFC:</td>
-						<td class="col-lg-3">{{ $cliente->rfc }}</td>
-						<td class="col-lg-1">Domicilio:</td>
-						<td>{{ $documento->direccion }}</td>
-					</tr>
-					<tr>
-						<td>Contacto:</td>
-						<td>{{ $documento->contacto_nombre }}</td>
-						<td>Email:</td>
+						<td class="col-lg-1">Contacto:</td>
+						<td class="col-lg-3">{{ $documento->contacto_nombre }}</td>
+						<td class="col-lg-1">Email:</td>
 						<td>{{ $documento->contacto_email }}</td>
 					</tr>
 					<tr>
+						<td>Vía:</td>
+						<td>
+							@if($documento->lugar == 0)
+								En sitio
+							@else
+								Remoto
+							@endif
+						</td>
+						<td>Domicilio:</td>
+						<td>{{ $documento->direccion }}</td>
+					</tr>
+					<tr>
 						<td>Tipo:</td>
-						@if($documento->tipo === 1)
-							<td>En sitio</td>
+						@if($documento->tipo === 0)
+							<td>Soporte</td>
 						@else
-							<td>Remoto</td>
+							<td>Iguala</td>
 						@endif
 						<td>Servicio:</td>
 						<td>{{ $documento->servicio_nombre }}</td>

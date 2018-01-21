@@ -97,8 +97,8 @@
                                     <td>{{ $documento->razon_social }}</td>
                                     <td>{{ $documento->fecha }}</td>
                                     <td>
-                                        <a href="{{ route('documentos.show', $documento->id) }}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> Imprimir</a>
-                                        <a href="#" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-envelope" aria-hidden="true"> Email</a>
+                                        <a href="{{ route('showPDF', $documento->id) }}" class="btn btn-default btn-xs"><i class="fa fa-print" aria-hidden="true"></i> PDF</a>
+                                        <a href="{{ route('send', $documento->id) }}" class="btn btn-default btn-xs"><i class="fa fa-envelope-o" aria-hidden="true"></i> Enviar</a>
                                     </td>
                                 </tr>
                                 @endforeach

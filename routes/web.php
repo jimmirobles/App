@@ -22,6 +22,10 @@ Route::resource('documentos', 'FrontController');
 Route::resource('usuarios', 'UsersController');
 
 Route::get('/', 'Auth\LoginController@showLoginForm');
+Route::get('send/{id}', 'FrontController@sendEmail')->name('send');
+
+Route::get('pdf/{id}', 'PDFController@show')->name('showPDF');
+
 Route::post('login', 'Auth\LoginController@login')->name('login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
@@ -40,8 +44,10 @@ Route::get('usuarios/{id}/destroy', [
 	'as' 	=> 'usuarios.destroy',
 ]);
 
-// Vistas de prueba
-Route::get('downloadPDF/{id}', 'FrontController@downloadPDF');
-Route::get('sendEmail', 'FrontController@sendEmail');
+Route::get('/mailable', function () {
+    $documento = CRM\Documento::find(1);
+    $folio = $documento['folio'];
 
+    return new CRM\Mail\DocumentCreated($folio);
+});
 

@@ -12,25 +12,31 @@
 			
 			{!! Form::open(['route'=>'documentos.store', 'method'=>'POST']) !!}
 				<section class="row">
-					<div class="col-lg-2 form-group">
+					<div class="col-lg-3 form-group">
 						{!! Form::label('folio', 'Folio:') !!}
 						{!! Form::text('folio', $next_folio+1, ['class'=>'form-control date', 'readonly'])!!}
 					</div>
-					<div class="col-lg-2 form-group">
+					<div class="col-lg-3 form-group">
 						{!! Form::label('fecha', 'Fecha:') !!}
 						{!! Form::text('fecha', null, ['class'=>'form-control date', 'id' => 'datepicker', 'placeholder'=>'dd/mm/aaaa', 'required'])!!}
 					</div>
-					<div class="col-lg-2 form-group">
+					<div class="col-lg-3 form-group">
 						{!! Form::label('hInicial', 'Hora inicial:') !!}
 						{!! Form::text('hInicial', null, ['class' => 'form-control timepicker', 'required'])!!}
 					</div>
-					<div class="col-lg-2 form-group">
+					<div class="col-lg-3 form-group">
 						{!! Form::label('hFinal', 'Hora final:') !!}
 						{!! Form::text('hFinal', null, ['class' => 'form-control timepicker', 'required'])!!}
 					</div>
-					<div class="col-lg-4 form-group">
+				</section>
+				<section class="row">
+					<div class="col-lg-6 form-group">
 						{!! Form::label('tipo', 'Tipo:') !!}
-						{!! Form::select('tipo', ['1' => 'En Sitio', '2' => 'Remoto'], null, ['class'=>'form-control select2', 'placeholder'=>'Selecciona algo...', 'required'])!!}
+						{!! Form::select('tipo', ['0' => 'Soporte', '1' => 'Iguala'], null, ['class'=>'form-control select2', 'placeholder'=>'Selecciona algo...', 'required'])!!}
+					</div>
+					<div class="col-lg-6 form-group">
+						{!! Form::label('lugar', 'Lugar:') !!}
+						{!! Form::select('lugar', ['0' => 'En sitio', '1' => 'Remoto'], null, ['class'=>'form-control select2', 'placeholder'=>'Selecciona algo...', 'required'])!!}
 					</div>
 				</section>
 				<section class="row">
@@ -52,7 +58,7 @@
 				<section class="row">
 					<div class="col-lg-6 form-group">
 						{!! Form::label('id_servicio', 'Servicio:') !!}
-						{!! Form::select('id_servicio', $servicios->all(), null, ['class'=>'form-control select2', 'placeholder'=>'Selecciona algo...', 'required'])!!}
+						{!! Form::select('id_servicio', $servicios->all(), null, ['class'=>'form-control select2 col-lg-4', 'placeholder'=>'Selecciona algo...', 'required'])!!}
 					</div>
 					<div class="col-lg-6 form-group">
 						{!! Form::label('id_asesor', 'Asesor:') !!}
@@ -79,6 +85,7 @@
 			{!! Form::close() !!}
 		</div>
 	</div>
+
 @endsection
 
 @section('custom_scripts')
@@ -100,9 +107,6 @@
         $('.select2').select2({
         	theme: "bootstrap"
         });
-  		// $("#id_cliente").change(function() {
-		//     $("#razon_social").val($(this).find('option:selected').text());
-		// });
     });
 </script>
 @endsection
