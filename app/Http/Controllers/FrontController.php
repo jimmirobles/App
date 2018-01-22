@@ -4,6 +4,7 @@ namespace CRM\Http\Controllers;
 
 use CRM\Mail\DocumentCreated;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use CRM\Http\Requests\DocumentoRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -34,7 +35,8 @@ class FrontController extends Controller
                         ->orderBy('id', 'dsc')
                         ->get();
         $cuenta = DB::table('documentos')->count();
-        return view('pages.index', compact('documentos', 'cuenta'));
+        $files = Storage::allFiles('public/pdfs');
+        return view('pages.index', compact('documentos', 'cuenta', 'files'));
     }
 
     /**
@@ -128,13 +130,14 @@ class FrontController extends Controller
 
     public function sendEmail($id)
     {
-        // Buscar el documento
         $documento = Documento::find($id);
         // Generar el PDF 
         $pdf = PDF::loadView('pages.pdf.show', $documento);
+        // Ruta del archivo
+        $file = 'app/public/pdfs/human_business_soporte_'.$documento->folio.'.pdf';
         
-        // Guardarlo en el servidor, si es correcto lo envía 
-        if ($pdf->save(storage_path('app/public/pdfs/human_business_soporte_'.$documento->folio.'.pdf'))) {
+        // Guardarlo en el servidor, si es correcto lo envía
+        if ($pdf->save(storage_path($file))) {
             Mail::to($documento->contacto_email)
                     ->send(new DocumentCreated($id, $documento->folio));
             flash('Documento enviado correctamente a: <strong>' . $documento->contacto_email . '</strong>')->success()->important();

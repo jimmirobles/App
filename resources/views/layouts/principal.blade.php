@@ -28,7 +28,6 @@
         <!-- /#page-wrapper -->
     </div>
     <!-- /#wrapper -->
-
 @include('includes.scripts')
 <script>
     $('#flash-overlay-modal').modal();

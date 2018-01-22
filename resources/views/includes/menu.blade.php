@@ -18,7 +18,7 @@
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> Perfil</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Configuracion</a>
+                        <li><a href="{{ route('clear-all') }}"><i class="fa fa-gear fa-fw"></i> Limpiar PDF's</a>
                         </li>
                         <li class="divider"></li>
                         <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-sign-out fa-fw"></i> Salir</a>

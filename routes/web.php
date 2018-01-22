@@ -25,6 +25,7 @@ Route::get('/', 'Auth\LoginController@showLoginForm');
 Route::get('send/{id}', 'FrontController@sendEmail')->name('send');
 
 Route::get('pdf/{id}', 'PDFController@show')->name('showPDF');
+Route::get('clear', 'PDFController@delete_all')->name('clear-all');
 
 Route::post('login', 'Auth\LoginController@login')->name('login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');

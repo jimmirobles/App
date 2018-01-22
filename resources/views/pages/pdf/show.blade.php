@@ -95,7 +95,7 @@
                     <table>
                         <tr>
                             <td class="logo">
-                                <img src="{{public_path() . '/img/logo-512x512.png'}}" style="width:100%; max-width:80px;">
+                                <img src="http://www.humanbusiness.com.mx/app/img/logo-512x512.png" style="width:100%; max-width:80px;">
                             </td>
                             <td class="title"><h1>HUMAN BUSINESS</h1></td>
                             <td class="dates">

@@ -55,17 +55,17 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-3">
-                            <i class="fa fa-comments fa-5x"></i>
+                            <i class="fa fa-hdd-o fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge">26</div>
-                            <div>New Comments!</div>
+                            <div class="huge">{{ count($files) }}</div>
+                            <div>Archivos en BD</div>
                         </div>
                     </div>
                 </div>
-                <a href="#">
+                <a href="#" data-toggle="modal" data-target="#myModal">
                     <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
+                        <span class="pull-left">Ver listado</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                         <div class="clearfix"></div>
                     </div>
@@ -97,7 +97,7 @@
                                     <td>{{ $documento->razon_social }}</td>
                                     <td>{{ $documento->fecha }}</td>
                                     <td>
-                                        <a href="{{ route('showPDF', $documento->id) }}" class="btn btn-default btn-xs"><i class="fa fa-print" aria-hidden="true"></i> PDF</a>
+                                        <a href="{{ route('showPDF', $documento->id) }}" target="_blank" class="btn btn-default btn-xs"><i class="fa fa-print" aria-hidden="true"></i> PDF</a>
                                         <a href="{{ route('send', $documento->id) }}" class="btn btn-default btn-xs"><i class="fa fa-envelope-o" aria-hidden="true"></i> Enviar</a>
                                     </td>
                                 </tr>
@@ -109,5 +109,6 @@
             </div>
         </div>
     </div>
+    @include('modals.list-files')
     <!-- /.row -->
 @endsection
