@@ -3,9 +3,12 @@
 namespace CRM;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Documento extends Model
 {
+    use SoftDeletes;
+
     protected $table = 'documentos';
 
     protected $fillable = [
@@ -36,4 +39,5 @@ class Documento extends Model
     //     'contacto_nombre' => 'jimmi',
     //     'contacto_email' => 'jimmi@email.com'
     // );
+    protected $dates = ['deleted_at'];
 }

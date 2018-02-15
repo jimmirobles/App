@@ -1,0 +1,18 @@
+.btn:focus, .btn:active:focus, .btn.active:focus {
+    outline: 0 none;
+}
+ 
+.btn-secundary {
+    background: #0099cc;
+    color: #ffffff;
+}
+ 
+.btn-secundary:hover, .btn-secundary:focus, .btn-secundary:active, .btn-secundary.active, .open > .dropdown-toggle.btn-secundary {
+    background: #33a6cc;
+    color: white;
+}
+ 
+.btn-secundary:active, .btn-secundary.active {
+    background: #007299;
+    box-shadow: none;
+}

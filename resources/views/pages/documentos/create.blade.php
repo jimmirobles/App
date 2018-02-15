@@ -40,25 +40,21 @@
 					</div>
 				</section>
 				<section class="row">
-					<div class="col-lg-12 form-group">
+					<div class="col-lg-6 form-group">
 						{!! Form::label('id_cliente', 'Cliente:') !!}
 						{!! Form::select('id_cliente', $empresas->all(), null, ['class'=>'form-control select2', 'placeholder'=>'Selecciona algo...', 'required'])!!}
 					</div>
-				</section>
-				<section class="row">
 					<div class="col-lg-6 form-group">
-						{!! Form::label('contacto_nombre', 'Contacto:') !!}
-						{!! Form::text('contacto_nombre', null, ['class' => 'form-control', 'required'])!!}
-					</div>
-					<div class="col-lg-6 form-group">
-						{!! Form::label('contacto_email', 'Email:') !!}
-						{!! Form::email('contacto_email', null, ['class' => 'form-control', 'required'])!!}
+						<label>Contacto:</label>
+					    <select id="id_contacto" class="form-control select2" name="id_contacto">
+					        <option value=""></option>
+				        </select>
 					</div>
 				</section>
 				<section class="row">
 					<div class="col-lg-6 form-group">
 						{!! Form::label('id_servicio', 'Servicio:') !!}
-						{!! Form::select('id_servicio', $servicios->all(), null, ['class'=>'form-control select2 col-lg-4', 'placeholder'=>'Selecciona algo...', 'required'])!!}
+						{!! Form::select('id_servicio', $servicios->all(), null, ['class'=>'form-control select2', 'placeholder'=>'Selecciona algo...', 'required'])!!}
 					</div>
 					<div class="col-lg-6 form-group">
 						{!! Form::label('id_asesor', 'Asesor:') !!}
@@ -80,7 +76,7 @@
 					</div>
 				</section>
 				<div class="form-group">
-					{!! Form::submit('Guardar', ['class'=>'btn btn-default']) !!}
+					{!! Form::submit('Guardar', ['class'=>'btn btn-primary']) !!}
 				</div>
 			{!! Form::close() !!}
 		</div>
@@ -107,6 +103,18 @@
         $('.select2').select2({
         	theme: "bootstrap"
         });
+        $('#id_cliente').on('change', function(e){
+	        // console.log(e);
+	        var cliente_id = e.target.value;
+	        var contactos = $('#id_contacto');
+	        $.get('{{ url('documentos') }}/create/ajax-contacto?cliente=' + cliente_id, function(data) {
+	        	// console.log(data);
+			    contactos.empty();
+			    $.each(data, function(value, display){
+			        contactos.append('<option value="' + display.id + '">' + display.nombre + '</option>');
+			    });
+	        });
+	    });
     });
 </script>
 @endsection

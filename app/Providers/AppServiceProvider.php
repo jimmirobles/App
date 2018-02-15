@@ -3,7 +3,9 @@
 namespace CRM\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Schema;
+use View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,6 +17,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+
+        $files = Storage::allFiles('public/pdfs');
+        View::share('storageFiles', $files); 
     }
 
     /**

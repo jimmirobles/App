@@ -25,6 +25,7 @@ class ClienteRequest extends FormRequest
     {
         return [
             'razon_social'  => 'min:5|required',
+            'email'         => 'email|required',
             'rfc'           => 'min:12|max:13|required|unique:clientes'
         ];
     }

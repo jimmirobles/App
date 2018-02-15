@@ -1,33 +1,35 @@
 <?php
+use CRM\Documento;
+use CRM\Contacto;
+use Illuminate\Support\Facades\Input;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::resources([
+	'dashboard' => 'FrontController',
+	'clientes' => 'ClientesController',
+	'servicios' => 'ServiciosController',
+	'documentos' => 'FrontController',
+	'usuarios' => 'UsersController',
+	'contactos' => 'ContactosController',
+	'comentarios' => 'ComentariosController'
+]);
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::prefix('reportes')->group(function(){
+	Route::get('reporte1', 'ReportesController@reporte1')->name('reporte1');
+	Route::get('reporte1-pdf', 'ReportesController@reporte1_view')->name('reporte1-pdf');
+});
 
-Route::resource('dashboard', 'FrontController');
-Route::resource('clientes', 'ClientesController');
-Route::resource('servicios', 'ServiciosController');
-Route::resource('documentos', 'FrontController');
-Route::resource('usuarios', 'UsersController');
+Route::prefix('api')->group(function(){
+	Route::get('documentos', 'FrontController@dataTables');
+	Route::get('clientes', 'ClientesController@dataTables');
+	Route::get('contactos', 'ContactosController@dataTables');
+});
 
 Route::get('/', 'Auth\LoginController@showLoginForm');
-Route::get('send/{id}', 'FrontController@sendEmail')->name('send');
-
 Route::get('pdf/{id}', 'PDFController@show')->name('showPDF');
 Route::get('clear', 'PDFController@delete_all')->name('clear-all');
 
 Route::post('login', 'Auth\LoginController@login')->name('login');
+Route::post('send', 'FrontController@sendEmail')->name('send');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('servicios/{id}/destroy', [
@@ -45,10 +47,23 @@ Route::get('usuarios/{id}/destroy', [
 	'as' 	=> 'usuarios.destroy',
 ]);
 
-Route::get('/mailable', function () {
-    $documento = CRM\Documento::find(1);
-    $folio = $documento['folio'];
+Route::get('documentos/{id}/destroy', [
+	'uses' 	=> 'FrontController@destroy',
+	'as' 	=> 'documentos.destroy',
+]);
 
-    return new CRM\Mail\DocumentCreated($folio);
+Route::get('documentos/create/ajax-contacto',function(){
+	$cliente_id = Input::get('cliente');
+	$contactos = Contacto::where('id_cliente','=',$cliente_id)->get();
+	return $contactos;
+ 
 });
 
+Route::get('reportes/obtener-datos', function() {
+	$id_cliente = Input::get('id_cliente');
+	$mes = Input::get('mes');
+	$documentos = Documento::where('id_cliente', '=', $id_cliente)
+				->whereMonth('fecha', $mes)
+				->get();
+	return $documentos;
+});

@@ -170,7 +170,8 @@ return [
          Collective\Html\HtmlServiceProvider::class,
          Laracasts\Flash\FlashServiceProvider::class,
          Barryvdh\DomPDF\ServiceProvider::class,
-         // Vsmoraes\Pdf\PdfServiceProvider::class,
+         odannyc\Alertify\AlertifyServiceProvider::class,
+         Yajra\DataTables\DataTablesServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -232,7 +233,8 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
-        // 'PDF' => 'Vsmoraes\Pdf\PdfFacade',
+        'Alertify' => odannyc\Alertify\Alertify::class,
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
 
     ],
 

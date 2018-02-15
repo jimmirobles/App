@@ -50,7 +50,7 @@
 					</tr>
 					<tr>
 						<td>Tipo:</td>
-						@if($documento->tipo === 0)
+						@if($documento->tipo == 0)
 							<td>Soporte</td>
 						@else
 							<td>Iguala</td>

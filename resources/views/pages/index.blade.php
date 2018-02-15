@@ -2,113 +2,61 @@
 
 @section('page-title', 'Home')
 
-@section('title', 'Inicio')
+@section('wrapper-title', 'Inicio')
 
 @section('content')
-    <div class="row">
-        <div class="col-lg-4 col-md-4">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-file-pdf-o fa-5x" aria-hidden="true"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge">{{ $cuenta }}</div>
-                            <div>Servicios totales</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="{{ route('documentos.create') }}">
-                    <div class="panel-footer">
-                        <span class="pull-left">Crear servicio</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-4">
-            <div class="panel panel-green">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-comments fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge">26</div>
-                            <div>New Comments!</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="#">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-4">
-            <div class="panel panel-yellow">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-hdd-o fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge">{{ count($files) }}</div>
-                            <div>Archivos en BD</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="#" data-toggle="modal" data-target="#myModal">
-                    <div class="panel-footer">
-                        <span class="pull-left">Ver listado</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Listado de servicios realizados
-                </div>
-                <div class="panel-body">
-                    <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th class="col-lg-1">Folio</th>
-                                    <th>Empresa</th>
-                                    <th>Fecha</th>
-                                    <th class="col-xs-3">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($documentos as $documento)
-                                <tr>
-                                    <td>{{ $documento->folio }}</td>
-                                    <td>{{ $documento->razon_social }}</td>
-                                    <td>{{ $documento->fecha }}</td>
-                                    <td>
-                                        <a href="{{ route('showPDF', $documento->id) }}" target="_blank" class="btn btn-default btn-xs"><i class="fa fa-print" aria-hidden="true"></i> PDF</a>
-                                        <a href="{{ route('send', $documento->id) }}" class="btn btn-default btn-xs"><i class="fa fa-envelope-o" aria-hidden="true"></i> Enviar</a>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    @include('modals.list-files')
-    <!-- /.row -->
+	@include('pages.front.cards')
+
+	<div class="table-responsive">
+		<table class="table table-bordered table-striped" id="documents-table" cellspacing="0" width="100%">
+			<thead>
+				<tr>
+					<th>Folio</th>
+					<th>Empresa</th>
+					<th>Fecha</th>
+					<th class="text-center"><li class="fa fa-cog fa-lg"></li></th>
+				</tr>
+			</thead>
+			<tbody>
+				
+			</tbody>
+		</table>
+	</div>
+	@include('modals.send-email')
+@endsection
+@section('custom_scripts')
+<script>
+	$(document).ready(function(){
+		$('#documents-table').DataTable({
+			"language": {
+				"url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+			},
+			"order": [[ 0, "desc" ]],
+			"columnDefs": [
+				{ "orderable": false, "targets": 3 }
+			],
+			"processing": true,
+			"serverSide": true,
+			"ajax": "/api/documentos",
+			"columns":[
+				{data: 'folio'},
+				{data: 'razon_social'},
+				{data: 'fecha'},
+				{data: 'action'},
+			]
+		});
+		$(function () {
+			$('[data-toggle="tooltip"]').tooltip();
+		})
+		$('#sendEmailModal').on('show.bs.modal', function (event) {
+		  var button = $(event.relatedTarget); 
+		  var iddocto = button.data('id'); 
+		  var emaildocto = button.data('email'); 
+		  var modal = $(this);
+		  modal.find('.modal-body input#email').val(emaildocto);
+		  modal.find('.modal-body input#id').val(iddocto);
+
+		});
+	});
+</script>
 @endsection
