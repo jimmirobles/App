@@ -5,16 +5,17 @@
 @endsection
 
 @section('contenido')
+<div class="container container-fluid">
 	<div class="row">
-		<div class="col-lg-3 col-xs-3">
+		<div class="col-md-auto col-lg-3 media-logo">
 			<img src="{{ asset('img/logo-512x512.png') }}" alt="logo hb" width="80px" class="img-circle center-block">
 		</div>
-		<div class="col-lg-6 col-xs-6">
+		<div class="col-lg-6 col-md-auto">
 			<h2 class="text-center">Human Business</h2>
 		</div>
-		<div class="col-lg-3 col-xs-3">
+		<div class="col-lg-3 col-md-auto">
 			<div class="text-center">
-				<strong>Reporte de Servicio</strong> <br>
+				<strong>REPORTE DE SERVICIO</strong> <br>
 				Fecha: {{ date('d-m-Y', strtotime($documento->fecha)) }} <br>
 				Folio: <big>{{ $documento->folio }}</big>
 			</div>
@@ -23,17 +24,17 @@
 	<hr>
 	{{-- /row encabezado --}}
 	<div class="row">
-		<div class="col-lg-12">
-			<table class="table table-bordered table-striped">
+		<div class="col table-responsive">
+			<table class="table table-bordered table-striped table-sm">
 				<tbody>
 					<tr>
 						<td colspan="1">Cliente:</td>
 						<td colspan="3">{{ $documento->razon_social }}</td>
 					</tr>
 					<tr>
-						<td class="col-lg-1">Contacto:</td>
-						<td class="col-lg-3">{{ $documento->contacto_nombre }}</td>
-						<td class="col-lg-1">Email:</td>
+						<td>Contacto:</td>
+						<td>{{ $documento->contacto_nombre }}</td>
+						<td>Email:</td>
 						<td>{{ $documento->contacto_email }}</td>
 					</tr>
 					<tr>
@@ -63,43 +64,37 @@
 		</div>
 	</div>
 	{{-- /row datos cliente --}}
-	<div class="row">
-		<div class="col-lg-12">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">Error reportado</h3>
-				</div>
-				<div class="panel-body">{{ $documento->error }}</div>
-			</div>
+	<div class="card mb-3">
+		<div class="card-header">
+			Error reportado
+		</div>
+		<div class="card-body table-responsive">
+			{{ $documento->error }}
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-lg-12">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">Actividad realizada</h3>
-				</div>
-				<div class="panel-body">{{ $documento->solucion }}</div>
-			</div>
+	<div class="card mb-3">
+		<div class="card-header">
+			Actividad realizada
+		</div>
+		<div class="card-body table-responsive">
+			{{ $documento->solucion }}
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-lg-12">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">Comentarios adicionales</h3>
-				</div>
-				<div class="panel-body">{{ $documento->comentarios }}</div>
-			</div>
+	<div class="card mb-3">
+		<div class="card-header">
+			Comentarios adicionales
+		</div>
+		<div class="card-body table-responsive">
+			{{ $documento->comentarios }}
 		</div>
 	</div>
 	{{-- /row contenido --}}
 	<div class="row">
-		<div class="col-lg-12">
+		<div class="col">
 			<table class="table table-bordered">
 				<tbody>
 					<tr>
-						<td class="col-lg-3">
+						<td>
 							<hr>
 							<div class="text-center">Asesor: {{ $documento->asesor_nombre }}</div>
 						</td>
@@ -109,7 +104,7 @@
 								<strong>Hora Final: </strong>{{ $documento->hFinal }}
 							</div>
 						</td>
-						<td class="col-lg-3">
+						<td>
 							<hr>
 							<div class="text-center">Firma de conformidad (cliente)</div>
 						</td>
@@ -118,5 +113,5 @@
 			</table>
 		</div>
 	</div>
-	{{-- /row footer --}}
+</div>
 @endsection

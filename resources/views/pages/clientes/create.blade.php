@@ -1,8 +1,10 @@
 @extends('layouts.principal')
 
-@section('page-title', 'Crear servicio')
+@section('page-title', 'Nuevo cliente')
 
-@section('title', 'Crear')
+@section('wrapper-title')
+	<i class="fa fa-pencil"></i> Crear cliente
+@endsection
 
 @section('content')
 	<div class="row">

@@ -45,7 +45,7 @@ class FrontController extends Controller
 	public function dataTables()
 	{
 		$documentos = DB::table('documentos')
-			->select(['id', 'folio', 'fecha', 'razon_social']);
+			->select(['id', 'folio', 'fecha', 'razon_social', 'contacto_email']);
 
 		
 		return datatables()->of($documentos)
@@ -53,10 +53,10 @@ class FrontController extends Controller
 				return '<div class="btn-group" role="group">
 					<button id="btnGroupDrop1" type="button" type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actiones</button>
 					<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-						<a class="dropdown-item" href="pdf/'.$documento->id.'" target="_blank"><i class="fa fa-print fa-fw" aria-hidden="true"></i> PDF</a></li>
-						<a class="dropdown-item" href="#" data-toggle="modal" data-target="#sendEmailModal" data-id="{{ $documento->id }}" data-email="{{ $documento->contacto_email }}"><i class="fa fa-envelope-o fa-fw" aria-hidden="true"></i> Enviar</a></li>
-						<a class="dropdown-item" href="/documentos/'.$documento->id.'" target="_blank"><i class="fa fa-globe fa-fw" aria-hidden="true"></i> Web</a></li>
-						<a class="dropdown-item" href="/documentos/'.$documento->id.'/destroy" onclick="return confirm(\'¿Deseas cancelarlo?\')"><i class="fa fa-ban fa-fw"></i> Cancelar</li></a>
+						<a class="dropdown-item" href="' . route('showPDF', $documento->id) . '" target="_blank"><i class="fa fa-print fa-fw" aria-hidden="true"></i> PDF</a></li>
+						<a class="dropdown-item" href="#" data-toggle="modal" data-target="#sendEmailModal" data-id="'. $documento->id .'" data-email="'. $documento->contacto_email .'"><i class="fa fa-envelope-o fa-fw" aria-hidden="true"></i> Enviar</a></li>
+						<a class="dropdown-item" href="' . route('documentos.show', $documento->id) . '" target="_blank"><i class="fa fa-globe fa-fw" aria-hidden="true"></i> Web</a></li>
+						<a class="dropdown-item" href="' . route('documentos.destroy', $documento->id) . '" onclick="return confirm(\'¿Deseas cancelarlo?\')"><i class="fa fa-ban fa-fw"></i> Cancelar</li></a>
 					</div>
 				</div>';
 			})

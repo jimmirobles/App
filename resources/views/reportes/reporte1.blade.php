@@ -2,7 +2,9 @@
 
 @section('page-title', 'Reporte 1')
 
-@section('wrapper-title', 'Reporte 1')
+@section('wrapper-title')
+	<i class="fa fa-calendar"></i> Reporte 1
+@endsection
 
 @section('content')
 	<div class="card">

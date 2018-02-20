@@ -27,7 +27,7 @@ class ClientesController extends Controller
 
 		return datatables()->of($clientes)
 			->addColumn('action', function ($cliente) {
-				return '<div class="btn-group" role="group"><a role="button" href="/clientes/' . $cliente->id . '/edit" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i> Editar</a><a role="button" href="/clientes/' . $cliente->id . '/destroy" class="btn btn-danger btn-sm" onclick="return confirm(\'¿Deseas eliminarlo?\')"><i class="fa fa-trash"></i></a></div>';
+				return '<div class="btn-group" role="group"><a role="button" href="' . route('clientes.edit', $cliente->id) . '" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i> Editar</a><a role="button" href="' . route('clientes.destroy', $cliente->id) . '" class="btn btn-danger btn-sm" onclick="return confirm(\'¿Deseas eliminarlo?\')"><i class="fa fa-trash"></i></a></div>';
 			})
 			->toJson();
 	}

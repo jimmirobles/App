@@ -2,7 +2,9 @@
 
 @section('page-title', 'Contactos')
 
-@section('wrapper-title', 'Lista de contactos')
+@section('wrapper-title')
+	<i class="fa fa-address-book-o"></i> Contactos
+@endsection
 
 @section('title-buttons')
 	<div class="pull-right">
@@ -46,7 +48,7 @@
 			],
 			"processing": true,
 			"serverSide": true,
-			"ajax": "/api/contactos",
+			"ajax": "{{ route('api.contactos') }}",
 			"columns":[
 				{data: 'razon_social'},
 				{data: 'contacto'},

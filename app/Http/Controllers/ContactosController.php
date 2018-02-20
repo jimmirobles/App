@@ -38,7 +38,7 @@ class ContactosController extends Controller
 
 		return datatables()->of($contactos)
 			->addColumn('action', function ($contacto) {
-				return '<div class="btn-group" role="group"><a role="button" href="/clientes/' . $contacto->id . '/edit" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i> Editar</a><a role="button" href="/clientes/' . $contacto->id . '/destroy" class="btn btn-danger btn-sm" onclick="return confirm(\'¿Deseas eliminarlo?\')"><i class="fa fa-trash"></i></a></div>';
+				return '<div class="btn-group" role="group"><a role="button" href="' . route('contactos.edit', $contacto->id) . '" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i> Editar</a><a role="button" href="' . route('contactos.destroy', $contacto->id) . '" class="btn btn-danger btn-sm" onclick="return confirm(\'¿Deseas eliminarlo?\')"><i class="fa fa-trash"></i></a></div>';
 			})
 			->toJson();
 	}

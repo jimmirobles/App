@@ -2,7 +2,9 @@
 
 @section('page-title', 'Comentarios')
 
-@section('wrapper-title', 'Listado de comentarios')
+@section('wrapper-title')
+	<i class="fa fa-comments-o"></i> Comentarios
+@endsection
 
 @section('content')
 	<div class="table-responsive">

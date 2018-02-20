@@ -11,9 +11,9 @@
 	{!! Form::email('email', null, ['class'=>'form-control', 'required'])!!}
 </div>
 <div class="form-group">
-	{!! Form::label('direccion', 'Domicilio:') !!}
+	{!! Form::label('direccion', 'Denominacion comercial:') !!}
 	{!! Form::text('direccion', null, ['class'=>'form-control'])!!}
 </div>
 <div class="form-group">
-	{!! Form::submit('Guardar', ['class'=>'btn btn-default']) !!}
+	{!! Form::submit('Guardar', ['class'=>'btn btn-primary']) !!}
 </div>

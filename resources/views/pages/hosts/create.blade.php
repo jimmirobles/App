@@ -1,9 +1,9 @@
 @extends('layouts.principal')
 
-@section('page-title', 'Nuevo contacto')
+@section('page-title', 'Nuevo host')
 
 @section('wrapper-title')
-	<i class="fa fa-pencil"></i> Crear contacto
+	<i class="fa fa-pencil"></i> Crear dominio
 @endsection
 
 @section('content')
@@ -12,12 +12,13 @@
 
 			@include('errors.form-error')
 			
-			{!! Form::open(['route'=>'contactos.store', 'method'=>'POST']) !!}
-				@include('forms.contactos')
+			{!! Form::open(['route'=>'hosts.store', 'method'=>'POST']) !!}
+				@include('forms.hosts')
 			{!! Form::close() !!}
 		</div>
 	</div>
 @endsection
+
 @section('custom_scripts')
 <script>
 	$(function () {

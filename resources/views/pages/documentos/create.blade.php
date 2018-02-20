@@ -2,7 +2,9 @@
 
 @section('page-title', 'Crear documento')
 
-@section('title', 'Crear')
+@section('wrapper-title')
+	<i class="fa fa-pencil"></i> Crear documento
+@endsection
 
 @section('content')
 	<div class="row">
@@ -46,9 +48,9 @@
 					</div>
 					<div class="col-lg-6 form-group">
 						<label>Contacto:</label>
-					    <select id="id_contacto" class="form-control select2" name="id_contacto">
-					        <option value=""></option>
-				        </select>
+						<select id="id_contacto" class="form-control select2" name="id_contacto">
+							<option value=""></option>
+						</select>
 					</div>
 				</section>
 				<section class="row">
@@ -87,34 +89,34 @@
 @section('custom_scripts')
 <script>
 	$(function () {
-        $('#datepicker').datetimepicker({
-        	locale: 'es',
-        	format: 'YYYY/MM/DD',
-        	daysOfWeekDisabled: [0],
-        	showTodayButton: true,
-        	showClose: true
-        });
-        $('.timepicker').datetimepicker({
-        	locale: 'es',
-        	format: 'hh:mm A',
-        	showTodayButton: true,
-        	showClose: true
-        });
-        $('.select2').select2({
-        	theme: "bootstrap"
-        });
-        $('#id_cliente').on('change', function(e){
-	        // console.log(e);
-	        var cliente_id = e.target.value;
-	        var contactos = $('#id_contacto');
-	        $.get('{{ url('documentos') }}/create/ajax-contacto?cliente=' + cliente_id, function(data) {
-	        	// console.log(data);
-			    contactos.empty();
-			    $.each(data, function(value, display){
-			        contactos.append('<option value="' + display.id + '">' + display.nombre + '</option>');
-			    });
-	        });
-	    });
-    });
+		$('#datepicker').datetimepicker({
+			locale: 'es',
+			format: 'YYYY/MM/DD',
+			daysOfWeekDisabled: [0],
+			showTodayButton: true,
+			showClose: true
+		});
+		$('.timepicker').datetimepicker({
+			locale: 'es',
+			format: 'hh:mm A',
+			showTodayButton: true,
+			showClose: true
+		});
+		$('.select2').select2({
+			theme: "bootstrap"
+		});
+		$('#id_cliente').on('change', function(e){
+			// console.log(e);
+			var cliente_id = e.target.value;
+			var contactos = $('#id_contacto');
+			$.get('{{ url('documentos') }}/create/ajax-contacto?cliente=' + cliente_id, function(data) {
+				// console.log(data);
+				contactos.empty();
+				$.each(data, function(value, display){
+					contactos.append('<option value="' + display.id + '">' + display.nombre + '</option>');
+				});
+			});
+		});
+	});
 </script>
 @endsection

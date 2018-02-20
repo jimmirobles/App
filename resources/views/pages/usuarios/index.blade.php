@@ -2,7 +2,9 @@
 
 @section('page-title', 'Usuarios')
 
-@section('wrapper-title', 'Listado de usuarios')
+@section('wrapper-title')
+	<i class="fa fa-users"></i> Usuarios
+@endsection
 
 @section('title-buttons')
 	<div class="pull-right">

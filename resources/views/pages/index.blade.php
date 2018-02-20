@@ -2,7 +2,9 @@
 
 @section('page-title', 'Home')
 
-@section('wrapper-title', 'Inicio')
+@section('wrapper-title')
+	<i class="fa fa-home"></i> Inicio
+@endsection
 
 @section('content')
 	@include('pages.front.cards')
@@ -37,7 +39,7 @@
 			],
 			"processing": true,
 			"serverSide": true,
-			"ajax": "/api/documentos",
+			"ajax": "{{ route('api.documentos') }}",
 			"columns":[
 				{data: 'folio'},
 				{data: 'razon_social'},

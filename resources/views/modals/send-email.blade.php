@@ -24,8 +24,8 @@
 		{!! Form::hidden('id', null, ['id' => 'id'])!!}
 	</div>
 	<div class="modal-footer">
-		<button type="submit" class="btn btn-primary">Enviar</button>
-		<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+		<button type="submit" class="btn btn-info">Enviar</button>
+		<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
 	</div>
 	{{ Form::close() }}
 @endsection

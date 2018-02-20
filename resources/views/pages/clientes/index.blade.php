@@ -2,7 +2,9 @@
 
 @section('page-title', 'Empresas')
 
-@section('wrapper-title', 'Lista de empresas')
+@section('wrapper-title')
+	<i class="fa fa-user-circle-o"></i> Clientes
+@endsection
 
 @section('title-buttons')
 	<div class="pull-right">
@@ -47,7 +49,7 @@
 			],
 			"processing": true,
 			"serverSide": true,
-			"ajax": "/api/clientes",
+			"ajax": "{{ route('api.clientes') }}",
 			"columns":[
 				{data: 'rfc'},
 				{data: 'razon_social'},

@@ -10,7 +10,8 @@ Route::resources([
 	'documentos' => 'FrontController',
 	'usuarios' => 'UsersController',
 	'contactos' => 'ContactosController',
-	'comentarios' => 'ComentariosController'
+	'comentarios' => 'ComentariosController',
+	'hosts' => 'HostsController'
 ]);
 
 Route::prefix('reportes')->group(function(){
@@ -19,9 +20,9 @@ Route::prefix('reportes')->group(function(){
 });
 
 Route::prefix('api')->group(function(){
-	Route::get('documentos', 'FrontController@dataTables');
-	Route::get('clientes', 'ClientesController@dataTables');
-	Route::get('contactos', 'ContactosController@dataTables');
+	Route::get('documentos', 'FrontController@dataTables')->name('api.documentos');
+	Route::get('clientes', 'ClientesController@dataTables')->name('api.clientes');
+	Route::get('contactos', 'ContactosController@dataTables')->name('api.contactos');
 });
 
 Route::get('/', 'Auth\LoginController@showLoginForm');

@@ -26,7 +26,7 @@
 				</li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Servicios">
 					<a class="nav-link" href="{{ route('servicios.index') }}">
-						<i class="fa fa-fw fa-wrench"></i>
+						<i class="fa fa-database fa-fw"></i>
 						<span class="nav-link-text">Servicios</span>
 					</a>
 				</li>
@@ -36,9 +36,15 @@
 						<span class="nav-link-text">Comentarios</span>
 					</a>
 				</li>
+				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Hosts">
+					<a class="nav-link" href="{{ route('hosts.index') }}">
+						<i class="fa fa-globe fa-fw"></i>
+						<span class="nav-link-text">Hosts</span>
+					</a>
+				</li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reportes">
 					<a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseReportes" data-parent="#exampleAccordion">
-						<i class="fa fa-wrench fa-fw"></i>
+						<i class="fa fa-calendar fa-fw"></i>
 						<span class="nav-link-text">Reportes</span>
 					</a>
 					<ul class="sidenav-second-level collapse" id="collapseReportes">
