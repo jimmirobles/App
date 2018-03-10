@@ -2,50 +2,48 @@
 
 @section('page-title', 'Servicios')
 
-@section('title', 'Listado de servicios')
+@section('wrapper-title')
+	<i class="fa fa-database"></i> Servicios
+@endsection
 
+@section('title-buttons')
+	<div class="pull-right">
+		<div class="btn-group btn-group-sm" role="group" aria-label="Botones de acciones de tabla">
+			<a role="button" href="{{ route('servicios.create')}}" class="btn btn-sm btn-outline-primary"><i class="fa fa-pencil fa-fw"></i> Nuevo</a>
+			<div class="btn-group btn-group-sm" role="group">
+			<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+			<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+				<a class="dropdown-item" href="{{ route('excel.exportar', 'servicios') }}">Descargar .XLS</a>
+			</div>
+			</div>
+		</div>
+	</div>
+@endsection
 @section('content')
-    <div class="row">
-    	<div class="col-lg-12">
-    		<div class="panel panel-default">
-    			<div class="panel-heading">
-    				Servicios
-    				<a href="{{ route('servicios.create') }}" class="btn btn-default btn-xs pull-right">
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo
-                    </a>
-    			</div>
-    			<div class="panel-body">
-    				<div class="table-responsive">
-    					<table class="table table-striped table-bordered table-hover">
-    						<thead>
-    							<tr>
-    								<th>#</th>
-    								<th>Nombre</th>
-                                    <th class="col-lg-2">Acción</th>
-    							</tr>
-    						</thead>
-    						<tbody>
-                                @foreach($servicios as $servicio)
-                                <tr>
-                                    <td>{{ $servicio->id }}</td>
-                                    <td>{{ $servicio->nombre }}</td>
-                                    <td>
-                                        <a href="{{ route('servicios.edit', $servicio->id) }}" class="btn btn-default btn-xs">
-                                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Editar
-                                        </a>
-                                        <a href="{{ route('servicios.destroy', $servicio->id) }}" onclick="return confirm('¿Deseas eliminarlo?')" class="btn btn-danger btn-xs"> 
-                                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Borrar
-                                        </a>
-                                    </td>
-                                </tr>
-                                @endforeach
-    						</tbody>
-    					</table>
-    				</div>
-                    {{ $servicios->links() }}
-    			</div>
-    		</div>
-    	</div>
-    </div>
-    <!-- /.row -->
+	<div class="table-responsive">
+		<table class="table table-bordered table-sm">
+			<thead class="thead-light">
+				<tr>
+					<th>Nombre</th>
+					<th class="text-center"><i class="fa fa-cog fa-lg"></i></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach($servicios as $servicio)
+				<tr>
+					<td>{{ $servicio->nombre }}</td>
+					<td>
+						<div class="btn-group" role="group">
+							<a role="button" href="{{ route('servicios.edit', $servicio->id) }}" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i> Editar</a>
+							<a role="button" href="{{ route('servicios.destroy', $servicio->id) }}" class="btn btn-danger btn-sm" onclick="return confirm('¿Deseas eliminarlo?')"><i class="fa fa-trash"></i></a>
+						</div>
+					</td>
+				</tr>
+				@endforeach
+			</tbody>
+		</table>
+		<div>
+			{{ $servicios->links('vendor.pagination.bootstrap-4') }}
+		</div>
+	</div>
 @endsection

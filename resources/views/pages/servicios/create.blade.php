@@ -2,7 +2,9 @@
 
 @section('page-title', 'Crear servicio')
 
-@section('title', 'Crear')
+@section('wrapper-title')
+	<i class="fa fa-pencil"></i> Crear servicio
+@endsection
 
 @section('content')
 	<div class="row">

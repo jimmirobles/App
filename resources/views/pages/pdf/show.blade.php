@@ -138,7 +138,7 @@
                         <tr>
                             <td class="info-title">Tipo:</td>
                             <td>
-                            	@if($tipo === 0)
+                            	@if($tipo == 0)
 									Soporte
 								@else
 									Iguala

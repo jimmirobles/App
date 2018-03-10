@@ -27,8 +27,7 @@ class DocumentoRequest extends FormRequest
             'fecha'             => 'string|required',
             'hInicial'          => 'string|required',
             'hFinal'            => 'string|required',
-            'contacto_nombre'   => 'string|required',
-            'contacto_email'    => 'email|required',
+            'id_contacto'       => 'required',
             'id_cliente'        => 'required',
             'id_servicio'       => 'required',
             'id_asesor'         => 'required'

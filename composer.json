@@ -13,7 +13,11 @@
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4.0",
-        "vsmoraes/laravel-pdf": "^2.0"
+        "maatwebsite/excel": "~2.1.0",
+        "nesbot/carbon": "^1.22",
+        "odannyc/laravel-alertify": "^1.0",
+        "vsmoraes/laravel-pdf": "^2.0",
+        "yajra/laravel-datatables-oracle": "~8.0"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

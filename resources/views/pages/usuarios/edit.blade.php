@@ -2,7 +2,9 @@
 
 @section('page-title', 'Crear usuario')
 
-@section('title', 'Nuevo usuario')
+@section('wrapper-title')
+	<i class="fa fa-pencil-square-o"></i> Editar usuario
+@endsection
 
 @section('content')
 	<div class="row">

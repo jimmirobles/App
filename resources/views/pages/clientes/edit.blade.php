@@ -2,7 +2,9 @@
 
 @section('page-title', 'Editar empresa')
 
-@section('title', 'Editar')
+@section('wrapper-title')
+	<i class="fa fa-pencil-square-o"></i> Editar cliente
+@endsection
 
 @section('content')
 	<div class="row">

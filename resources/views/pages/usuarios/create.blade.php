@@ -2,7 +2,9 @@
 
 @section('page-title', 'Crear usuario')
 
-@section('title', 'Nuevo usuario')
+@section('wrapper-title')
+	<i class="fa fa-user-plus"></i> Crear usuario
+@endsection
 
 @section('content')
 	<div class="row">
