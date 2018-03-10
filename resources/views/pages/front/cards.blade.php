@@ -5,7 +5,7 @@
 					<div class="card-body-icon">
 						<i class="fa fa-file-pdf-o"></i>
 					</div>
-					<div class="mr-5">{{ $c_doctos }} Servicios totales!</div>
+					<div class="mr-5">{{ $c_doctos }} servicios realizados</div>
 				</div>
 				<a class="card-footer text-white clearfix small z-1" href="{{ route('documentos.create') }}">
 					<span class="float-left">Crear servicio</span>
@@ -21,7 +21,7 @@
 					<div class="card-body-icon">
 						<i class="fa fa-user-circle-o"></i>
 					</div>
-					<div class="mr-5">{{ $c_clientes }} Clientes totales</div>
+					<div class="mr-5">{{ $c_clientes }} clientes totales</div>
 				</div>
 				<a class="card-footer text-white clearfix small z-1" href="{{ route('clientes.index') }}">
 					<span class="float-left">Ir a clientes</span>
@@ -37,7 +37,7 @@
 					<div class="card-body-icon">
 						<i class="fa fa-comments"></i>
 					</div>
-					<div class="mr-5">{{ $c_comments }} Comentarios totales</div>
+					<div class="mr-5">{{ $c_comments }} comentarios recibidos</div>
 				</div>
 				<a class="card-footer text-white clearfix small z-1" href="{{ route('comentarios.index') }}">
 					<span class="float-left">Ver listado</span>

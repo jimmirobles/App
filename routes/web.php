@@ -25,6 +25,9 @@ Route::prefix('api')->group(function(){
 	Route::get('contactos', 'ContactosController@dataTables')->name('api.contactos');
 });
 
+Route::get('excel/{tipo}/exportar', 'ExcelController@exportar_excel')->name('excel.exportar');
+Route::get('csv/{tipo}/exportar', 'ExcelController@exportar_csv')->name('csv.exportar');
+
 Route::get('/', 'Auth\LoginController@showLoginForm');
 Route::get('pdf/{id}', 'PDFController@show')->name('showPDF');
 Route::get('clear', 'PDFController@delete_all')->name('clear-all');
@@ -53,18 +56,29 @@ Route::get('documentos/{id}/destroy', [
 	'as' 	=> 'documentos.destroy',
 ]);
 
+Route::get('contactos/{id}/destroy', [
+	'uses' 	=> 'ContactosController@destroy',
+	'as' 	=> 'contactos.destroy',
+]);
+
+Route::get('hosts/{id}/destroy', [
+	'uses' 	=> 'HostsController@destroy',
+	'as' 	=> 'hosts.destroy',
+]);
+
 Route::get('documentos/create/ajax-contacto',function(){
 	$cliente_id = Input::get('cliente');
-	$contactos = Contacto::where('id_cliente','=',$cliente_id)->get();
+	$contactos = Contacto::where('id_cliente','=',$cliente_id)->orderBy('nombre')->get();
 	return $contactos;
  
 });
 
 Route::get('reportes/obtener-datos', function() {
 	$id_cliente = Input::get('id_cliente');
-	$mes = Input::get('mes');
+	$fecha1 = Input::get('fecha1');
+	$fecha2 = Input::get('fecha2');
 	$documentos = Documento::where('id_cliente', '=', $id_cliente)
-				->whereMonth('fecha', $mes)
+				->whereBetween('fecha', [$fecha1, $fecha2])
 				->get();
 	return $documentos;
 });

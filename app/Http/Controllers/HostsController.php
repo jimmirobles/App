@@ -2,22 +2,26 @@
 
 namespace CRM\Http\Controllers;
 
-use CRM\Host;
-use Illuminate\Http\Request;
 use CRM\Http\Requests\HostRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use Carbon\Carbon;
+use CRM\Documento;
 use CRM\Cliente;
+use CRM\Host;
 
 class HostsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        Carbon::setLocale('es');
+    }
+
     public function index()
     {
-        $hosts = DB::table('hosts')->orderBy('fecha_inicial')->paginate(9);
+        $hosts = Host::orderBy('fecha_final', 'ASC')->paginate(9);
+
         return view('pages.hosts.index')
             ->with('hosts', $hosts);
     }
@@ -47,7 +51,9 @@ class HostsController extends Controller
         $host->cliente_nombre = $cliente->razon_social;
         $host->save();
 
-        flash('Dominio: <strong>'. $host->dominio .'</strong>, agregado correctamente.')->success()->important();
+        flash('Dominio: <strong>'. $host->dominio .'</strong>, agregado correctamente.')
+            ->success()
+            ->important();
         return redirect()->action('HostsController@index');
     }
 
@@ -91,8 +97,13 @@ class HostsController extends Controller
      * @param  \CRM\Host  $host
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Host $host)
+    public function destroy($id)
     {
-        //
+        $host = Host::find($id);
+        $host->delete();
+        flash('Se ha borrado <strong>'. $host->dominio .'</strong> exitosamente!')
+            ->error()
+            ->important();
+        return redirect()->action('HostsController@index');
     }
 }

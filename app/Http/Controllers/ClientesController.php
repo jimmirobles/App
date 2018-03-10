@@ -6,6 +6,8 @@ use CRM\Http\Requests\ClienteRequest;
 use Illuminate\Support\Facades\DB;
 use Yajra\Datatables\Datatables;
 use Illuminate\Http\Request;
+use CRM\Documento;
+use CRM\Contacto;
 use CRM\Cliente;
 
 class ClientesController extends Controller
@@ -53,7 +55,9 @@ class ClientesController extends Controller
 		$cliente = new Cliente($request->all());
 		$cliente->save();
 
-		flash('Cliente: <strong>'. $cliente->razon_social .'</strong>, agregado correctamente.')->success()->important();
+		flash('Cliente: <strong>'. $cliente->razon_social .'</strong>, agregado correctamente.')
+			->success()
+			->important();
 		return redirect()->action('ClientesController@index');
 	}
 
@@ -93,7 +97,9 @@ class ClientesController extends Controller
 		$cliente->fill($request->all());
 		$cliente->save();
 
-		flash('Se ha actualizado: <strong>'. $cliente->razon_social .'</strong>, correctamente.')->success()->important();
+		flash('Se ha actualizado: <strong>'. $cliente->razon_social .'</strong>, correctamente.')
+			->success()
+			->important();
 		return redirect()->action('ClientesController@index');
 	}
 
@@ -105,9 +111,23 @@ class ClientesController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$cliente = Cliente::find($id);
-		$cliente->delete();
-		flash('Se ha borrado: <strong>'. $cliente->razon_social .'</strong>, exitosamente!')->error()->important();
+		if (Documento::where('id_cliente', '=', $id)->exists()) {
+			flash('No se permite eliminar, ya existen documentos de este cliente.')
+				->error()
+				->important();
+		}
+		elseif (Contacto::where('id_cliente', '=', $id)->exists()) {
+			flash('No se permite eliminar, ya existen contactos asociados a este cliente.')
+				->error()
+				->important();
+		}
+		else {
+			$cliente = Cliente::find($id);
+			$cliente->delete();
+			flash('Se ha borrado: <strong>'. $cliente->razon_social .'</strong>, exitosamente!')
+				->success()
+				->important();
+		}
 		return redirect()->action('ClientesController@index');
 	}
 }

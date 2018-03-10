@@ -49,7 +49,7 @@
 					</a>
 					<ul class="sidenav-second-level collapse" id="collapseReportes">
 						<li>
-							<a href="{{ route('reporte1') }}">Reporte 1</a>
+							<a href="{{ route('reporte1') }}">Doctos. por rango</a>
 						</li>
 						<li>
 							<a href="#">Registration Page</a>

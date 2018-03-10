@@ -25,7 +25,7 @@ class ContactoRequest extends FormRequest
     {
         return [
             'nombre'    => 'min:5|required',
-            'email'     => 'email|required|unique:contactos'
+            'email'     => 'email|required'
         ];
     }
 }

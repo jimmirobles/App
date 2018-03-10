@@ -5,98 +5,76 @@ namespace CRM\Http\Controllers;
 use CRM\Http\Requests\ServicioRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use Laracasts\Flash\Flash;
+// use Laracasts\Flash\Flash;
+use CRM\Documento;
 use CRM\Servicio;
 
 class ServiciosController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        $servicios = DB::table('servicios')->orderBy('nombre')->paginate(9);
-        return view('pages.servicios.index', compact('servicios'));
+        $servicios = DB::table('servicios')
+            ->orderBy('nombre')
+            ->paginate(9);
+        return view('pages.servicios.index')
+            ->with('servicios', $servicios);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('pages.servicios.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(ServicioRequest $request)
     {
         $servicio = new Servicio($request->all());
         $servicio->save();
 
-        flash('Servicio: <strong>'. $servicio->nombre .'</strong> agregado correctamente.')->success()->important();
+        flash('Servicio: <strong>'. $servicio->nombre .'</strong> agregado correctamente.')
+            ->success()
+            ->important();
         return redirect()->action('ServiciosController@index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $servicio = Servicio::find($id);
-        return view('pages.servicios.edit', compact('servicio'));
+        return view('pages.servicios.edit')
+            ->with('servicio', $servicio);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $servicio = Servicio::find($id);
         $servicio->fill($request->all());
         $servicio->save();
 
-        flash('Se ha actualizado <strong>'. $servicio->nombre .'</strong> correctamente.')->success()->important();
+        flash('Se ha actualizado <strong>'. $servicio->nombre .'</strong> correctamente.')
+            ->success()
+            ->important();
         return redirect()->action('ServiciosController@index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        $servicio = Servicio::find($id);
-        $servicio->delete();
-        flash('Se ha borrado <strong>'. $servicio->nombre .'</strong> exitosamente!')->error()->important();
+        if (Documento::where('id_servicio', '=', $id)->exists()) {
+            flash('No se permite eliminar, ya existen documentos de este servicio.')
+                ->error()
+                ->important();
+        }
+        else {
+            $servicio = Servicio::find($id);
+            $servicio->delete();
+            flash('Se ha borrado <strong>'. $servicio->nombre .'</strong> exitosamente!')
+                ->error()
+                ->important();
+        }
         return redirect()->action('ServiciosController@index');
     }
 }

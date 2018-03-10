@@ -25,6 +25,9 @@
 		$('.select2').select2({
 			theme: "bootstrap"
 		});
+		$('.inputmask').inputmask({
+			mask: '9999/99/99'
+		});
 	});
 </script>
 @endsection

@@ -13,7 +13,8 @@
 			<div class="btn-group btn-group-sm" role="group">
 			<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
 			<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-				<a class="dropdown-item" href="#">Descargar .XLS</a>
+				<a href="{{ route('excel.exportar', 'clientes') }}" class="dropdown-item">Descargar .XLS</a>
+				<a href="{{ route('csv.exportar', 'clientes') }}" class="dropdown-item"> Descargar .CSV</a>
 			</div>
 			</div>
 		</div>

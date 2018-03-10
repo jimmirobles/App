@@ -24,21 +24,29 @@
 		<table class="table table-bordered table-sm">
 			<thead class="thead-light">
 				<tr>
-					<th>Fecha Inicial</th>
 					<th>Cliente</th>
 					<th>Dominio</th>
+					<th>Fecha Inicial</th>
 					<th>Fecha Final</th>
+					<th>Tiempo restante</th>
 					<th class="text-center"><i class="fa fa-cog fa-lg"></i></th>
 				</tr>
 			</thead>
 			<tbody>
 				@foreach($hosts as $host)
 					<tr>
-						<td>{{ $host->fecha_inicial }}</td>
 						<td>{{ $host->cliente_nombre }}</td>
 						<td>{{ $host->dominio }}</td>
-						<td><span class="badge badge-success">{{ $host->fecha_final }}</span></td>
-						<td></td>
+						<td>{{ $host->fecha_inicial }}</td>
+						<td>
+							@if(\Carbon\Carbon::parse($host->fecha_final)->isPast())
+								<span class="badge badge-danger">{{ $host->fecha_final }}</span>
+							@else 
+								<span class="badge badge-success">{{ $host->fecha_final }}</span>
+							@endif
+						</td>
+						<td>{{ \Carbon\Carbon::parse($host->fecha_final)->diffForHumans() }}</td>
+						<td><a role="button" href="{{ route('hosts.destroy', $host->id) }}" class="btn btn-danger btn-sm" onclick="return confirm('¿Deseas eliminarlo?')" data-toggle="tooltip" data-placement="left" title="Borrar"><i class="fa fa-trash"></i></a></td>
 					</tr>
 				@endforeach
 			</tbody>

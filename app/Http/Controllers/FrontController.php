@@ -9,6 +9,7 @@ use CRM\Http\Requests\DocumentoRequest;
 use Illuminate\Support\Facades\DB;
 use Yajra\Datatables\Datatables;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use CRM\User;
 use CRM\Documento;
 use CRM\Servicio;
@@ -30,8 +31,11 @@ class FrontController extends Controller
 	 */
 	public function index()
 	{
+		$c_doctos = DB::table('documentos')
+			->select('id')
+			->where('deleted_at', '=', NULL)
+			->count();
 		$c_clientes = DB::table('clientes')->count();
-		$c_doctos = DB::table('documentos')->count();
 		$c_comments = DB::table('comentarios')->count();
 
 		$data = [
@@ -39,13 +43,14 @@ class FrontController extends Controller
 			'c_clientes' => $c_clientes,
 			'c_doctos' => $c_doctos
 		];
-		return view('pages.index')->with($data);
+		return view('pages.front.index')->with($data);
 	}
 
 	public function dataTables()
 	{
 		$documentos = DB::table('documentos')
-			->select(['id', 'folio', 'fecha', 'razon_social', 'contacto_email']);
+			->select(['id', 'folio', 'fecha', 'razon_social', 'contacto_email'])
+			->where('deleted_at', '=', NULL);
 
 		
 		return datatables()->of($documentos)

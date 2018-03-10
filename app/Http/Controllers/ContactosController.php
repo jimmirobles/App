@@ -10,19 +10,9 @@ use CRM\Cliente;
 
 class ContactosController extends Controller
 {
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
 	public function index()
 	{
-		$contactos = DB::table('contactos')
-					->join('clientes', 'contactos.id_cliente', '=', 'clientes.id')
-					->select('contactos.*', 'clientes.razon_social')
-					->orderBy('clientes.razon_social', 'ASC')->paginate(9);
-		return view('pages.contactos.index')
-				->with('contactos', $contactos);
+		return view('pages.contactos.index');
 	}
 
 	public function dataTables()
@@ -31,7 +21,7 @@ class ContactosController extends Controller
 			->join('clientes', 'contactos.id_cliente', '=', 'clientes.id')
 			->select([
 				'contactos.id', 
-				'contactos.nombre as contacto', 
+				'contactos.nombre', 
 				'contactos.email', 
 				'clientes.razon_social'
 			]);
@@ -89,7 +79,13 @@ class ContactosController extends Controller
 	 */
 	public function edit($id)
 	{
-		//
+		$contacto = Contacto::find($id);
+		$clientes = Cliente::all()->sortBy('razon_social')->pluck('razon_social', 'id');
+		return view('pages.contactos.edit', compact('contacto'))
+			->with([
+				'contacto' => $contacto,
+				'clientes' => $clientes
+			]);
 	}
 
 	/**
@@ -112,6 +108,11 @@ class ContactosController extends Controller
 	 */
 	public function destroy($id)
 	{
-		//
+		$contacto = Contacto::find($id);
+		$contacto->delete();
+		flash('Se ha borrado: <strong>'. $contacto->nombre .'</strong>, exitosamente!')
+			->success()
+			->important();
+		return redirect()->action('ContactosController@index');
 	}
 }

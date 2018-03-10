@@ -3,7 +3,7 @@
 @section('page-title', 'Reporte 1')
 
 @section('wrapper-title')
-	<i class="fa fa-calendar"></i> Reporte 1
+	<i class="fa fa-calendar"></i> Documentos: Por rango de fechas
 @endsection
 
 @section('content')
@@ -11,16 +11,20 @@
 		<div class="card-header">Parametros del reporte</div>
 		<div class="card-body">
 			{{ Form::open(['method'=>'GET', 'class' => 'form-inline', 'id' => 'form1']) }}
-				<div class="form-group col-sm-6">
+				<div class="form-group col-4">
 					<label for="id_cliente" class="sr-only">Cliente</label>
 					{!! Form::select('id_cliente', $clientes->all(), null, ['class'=>'form-control select2', 'style' => 'width:100%;', 'placeholder'=>'Selecciona el cliente...', 'required'])!!}
 				</div>
-				<div class="form-group col-sm-3">
-					<label for="mes" class="sr-only">Mes</label>
-					{{ Form::selectMonth('mes', null, ['class' => 'form-control select2', 'style' => 'width:100%;', 'placeholder' => 'Selecciona un mes...', 'required']) }}
+				<div class="form-group col-3">
+					<label for="fecha1" class="sr-only">Al:</label>
+					{{ Form::text('fecha1', null, ['class' => 'form-control datetimepicker', 'placeholder' => 'Fecha final', 'required']) }}
 				</div>
-				<div class="col-sm-3 text-right">
-					<button type="submit" id="submit" class="btn btn-info btn-sm">Ejecutar</button>
+				<div class="form-group col-3">
+					<label for="fecha2" class="sr-only">Al:</label>
+					{{ Form::text('fecha2', null, ['class' => 'form-control datetimepicker', 'placeholder' => 'Fecha final', 'required']) }}
+				</div>
+				<div class="col-2 text-right">
+					<button type="submit" id="submit" class="btn btn-info btn-sm"><i class="fa fa-search"></i> Ver</button>
 					<button type="submit" class="btn btn-danger btn-sm" formaction="{{ route('reporte1-pdf') }}"><i class="fa fa-file-pdf-o"></i> PDF</button>
 				</div>
 			{{ Form::close() }}
@@ -53,6 +57,11 @@
 @section('custom_scripts')
 <script>
 	$(function () {
+		$('.datetimepicker').datetimepicker({
+			format: 'YYYY/MM/DD',
+			locale: 'es'
+		});
+		
 		$('.select2').select2({
 			theme: "bootstrap",
 			width: 'resolve'

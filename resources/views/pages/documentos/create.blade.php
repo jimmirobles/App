@@ -12,23 +12,24 @@
 
 			@include('errors.form-error')
 			
-			{!! Form::open(['route'=>'documentos.store', 'method'=>'POST']) !!}
+			{!! Form::open(['route'=>'documentos.store', 'method'=>'POST', 'id' => 'myForm']) !!}
 				<section class="row">
 					<div class="col-lg-3 form-group">
 						{!! Form::label('folio', 'Folio:') !!}
-						{!! Form::text('folio', $next_folio+1, ['class'=>'form-control date', 'readonly'])!!}
+						{!! Form::text('folio', $next_folio+1, ['class'=>'form-control', 'readonly'])!!}
 					</div>
 					<div class="col-lg-3 form-group">
 						{!! Form::label('fecha', 'Fecha:') !!}
-						{!! Form::text('fecha', null, ['class'=>'form-control date', 'id' => 'datepicker', 'placeholder'=>'dd/mm/aaaa', 'required'])!!}
+						{!! Form::date('fecha', \Carbon\Carbon::now(), ['class'=>'form-control', 'required'])!!}
 					</div>
 					<div class="col-lg-3 form-group">
 						{!! Form::label('hInicial', 'Hora inicial:') !!}
-						{!! Form::text('hInicial', null, ['class' => 'form-control timepicker', 'required'])!!}
+						{!! Form::time('hInicial', null, ['class' => 'form-control timepicker', 'required'])!!}
 					</div>
 					<div class="col-lg-3 form-group">
 						{!! Form::label('hFinal', 'Hora final:') !!}
-						{!! Form::text('hFinal', null, ['class' => 'form-control timepicker', 'required'])!!}
+						{!! Form::time('hFinal', null, ['class' => 'form-control timepicker', 'required'])!!}
+						{{-- <input type="time" class="form-control"> --}}
 					</div>
 				</section>
 				<section class="row">
@@ -79,6 +80,7 @@
 				</section>
 				<div class="form-group">
 					{!! Form::submit('Guardar', ['class'=>'btn btn-primary']) !!}
+					<a class="btn btn-danger" href="{{ URL::previous() }}">Cancelar</a>
 				</div>
 			{!! Form::close() !!}
 		</div>
@@ -89,18 +91,9 @@
 @section('custom_scripts')
 <script>
 	$(function () {
-		$('#datepicker').datetimepicker({
-			locale: 'es',
-			format: 'YYYY/MM/DD',
-			daysOfWeekDisabled: [0],
-			showTodayButton: true,
-			showClose: true
-		});
-		$('.timepicker').datetimepicker({
-			locale: 'es',
-			format: 'hh:mm A',
-			showTodayButton: true,
-			showClose: true
+		$('.timepicker').timepicker({
+		    timeFormat: 'HH:mm',
+		    dropdown: false
 		});
 		$('.select2').select2({
 			theme: "bootstrap"

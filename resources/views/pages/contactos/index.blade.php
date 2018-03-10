@@ -13,7 +13,8 @@
 			<div class="btn-group btn-group-sm" role="group">
 				<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
 				<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-					<a class="dropdown-item" href="#">Descargar .XLS</a>
+					<a href="{{ route('excel.exportar', 'contactos') }}" class="dropdown-item">Descargar .XLS</a>
+					<a href="{{ route('csv.exportar', 'contactos') }}" class="dropdown-item"> Descargar .CSV</a>
 				</div>
 			</div>
 		</div>
@@ -21,17 +22,17 @@
 @endsection
 @section('content')
 	<div class="table-responsive">
-			<table class="table table-bordered table-sm" id="contacts-table">
-				<thead class="thead-light">
-					<tr>
-						<th>Empresa</th>
-						<th>Nombre</th>
-						<th>Email</th>
-						<th class="text-center"><i class="fa fa-cog fa-lg"></i></th>
-					</tr>
-				</thead>
-				<tbody> </tbody>
-			</table>
+		<table class="table table-bordered table-striped table-sm" id="contacts-table">
+			<thead>
+				<tr>
+					<th>Empresa</th>
+					<th>Nombre</th>
+					<th>Email</th>
+					<th class="text-center"><i class="fa fa-cog fa-lg"></i></th>
+				</tr>
+			</thead>
+			<tbody> </tbody>
+		</table>
 	</div>
 @endsection
 
@@ -50,9 +51,9 @@
 			"serverSide": true,
 			"ajax": "{{ route('api.contactos') }}",
 			"columns":[
-				{data: 'razon_social'},
-				{data: 'contacto'},
-				{data: 'email'},
+				{data: 'razon_social', name:'clientes.razon_social'},
+				{data: 'nombre', name:'contactos.nombre'},
+				{data: 'email', name:'contactos.email'},
 				{data: 'action'},
 			]
 		});

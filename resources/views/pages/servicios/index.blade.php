@@ -13,7 +13,7 @@
 			<div class="btn-group btn-group-sm" role="group">
 			<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
 			<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-				<a class="dropdown-item" href="#">Descargar .XLS</a>
+				<a class="dropdown-item" href="{{ route('excel.exportar', 'servicios') }}">Descargar .XLS</a>
 			</div>
 			</div>
 		</div>
@@ -42,6 +42,8 @@
 				@endforeach
 			</tbody>
 		</table>
+		<div>
+			{{ $servicios->links('vendor.pagination.bootstrap-4') }}
+		</div>
 	</div>
-	{{ $servicios->links() }}
 @endsection
